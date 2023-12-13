@@ -1,10 +1,19 @@
 
-const useRouter = (routes:any) => {
+const useRouter = () => {
 
- const path = window.location.pathname;
- console.log(path)
- console.log(routes[path])
-return routes[path];
+    const route = (routes:any) => {
+        const path = window.location.pathname;
+        return routes[path];
+    };
+
+    const navigate = (path:string) => {
+        window.location.href = path;
+    };
+
+    return {
+        route: route,
+        navigate: navigate
+    }
 };
 
 export default useRouter;

@@ -13,7 +13,9 @@ function App() {
     '/read': <ReadPage />
   };
 
-  const routeResult = useRouter(routes);
+  const router = useRouter();
+
+  const routeResult = router.route(routes);
 
   return routeResult || <NotFoundPage />
 }

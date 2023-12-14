@@ -1,4 +1,8 @@
+import useRouter from "../hooks/useRouter";
+
 const ReadPage = () => {
+
+    const router = useRouter();
 
     let text = "";
 
@@ -6,6 +10,13 @@ const ReadPage = () => {
         text = localStorage.getItem("text") || "";
     };
 
+    const checkData = () => {
+        if(!localStorage.getItem("text")){
+            router.navigate('/import');
+        }
+    }
+
+    checkData();
     loadText();
 
   return (

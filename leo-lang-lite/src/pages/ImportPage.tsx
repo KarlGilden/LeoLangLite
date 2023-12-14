@@ -5,11 +5,22 @@ const ImportPage = () => {
     const router = useRouter();
     
     const [text, setText] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
     const submit = () => {
-        localStorage.setItem("text", text);
-        router.navigate("/read");
-    }
+        if(textIsValid()){
+            localStorage.setItem("text", text);
+            router.navigate("/read");
+        }
+    };
+
+    const textIsValid = () => {
+        if(text === ""){
+            setError("Please enter all fields");
+            return false;
+        }
+        return true;
+    };
 
   return (
     <div>
@@ -20,6 +31,7 @@ const ImportPage = () => {
             ></textarea>
         </div>
         <button onClick={()=>submit()}>Read!</button>
+        <p>{error}</p>
     </div>
   )
 }

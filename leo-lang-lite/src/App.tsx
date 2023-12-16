@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import './App.css'
 import useRouter from './hooks/useRouter';
 import Layout from './layouts/Layout';

@@ -1,5 +1,5 @@
 .word-highlight{
-    background-color:#7dd3fc;
+    background-color: var(--primary);
     line-height: 100%;
     border-width: 0px;
     padding: 2px 0 3px;

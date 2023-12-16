@@ -35,15 +35,20 @@ const ImportPage = () => {
     };
 
   return (
-    <div className="container">
-        <h1>Import</h1>
-        <div>
+    <div className="page-centered">
+        <div className='container'>
+            <h1>Import</h1>
+            <p className='spacer-medium'></p>
             <textarea
+                className='input'
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
+            <p className='spacer-medium'></p>
+            <button className='btn btn-medium' onClick={()=>submit()}>
+                Read!
+            </button>
+            <p>{error}</p>
         </div>
-        <button onClick={()=>submit()}>Read!</button>
-        <p>{error}</p>
     </div>
   )
 }

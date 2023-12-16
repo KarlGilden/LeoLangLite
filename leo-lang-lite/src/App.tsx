@@ -1,9 +1,12 @@
+import { ReactNode } from 'react';
 import './App.css'
 import useRouter from './hooks/useRouter';
+import Layout from './layouts/Layout';
 import HomePage from './pages/HomePage';
 import ImportPage from './pages/ImportPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ReadPage from './pages/ReadPage';
+import Navbar from './components/Navbar';
 
 function App() {
 
@@ -15,9 +18,14 @@ function App() {
 
   const router = useRouter();
 
-  const routeResult = router.route(routes);
+  const routeResult: JSX.Element = router.route(routes);
 
-  return routeResult || <NotFoundPage />
+  return (
+    <Layout>
+      <Navbar/>
+      {routeResult || <NotFoundPage />}
+    </Layout>
+    )
 }
 
 export default App

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useRouter from '../hooks/useRouter';
-
+import './css/ImportPage.css'
 const ImportPage = () => {
     const router = useRouter();
     
@@ -9,7 +9,8 @@ const ImportPage = () => {
 
     const submit = () => {
         if(textIsValid()){
-            localStorage.setItem("text", text);
+            const formattedText = buildText();
+            localStorage.setItem("text", formattedText);
             router.navigate("/read");
         }
     };
@@ -22,11 +23,22 @@ const ImportPage = () => {
         return true;
     };
 
+    const buildText = () => {
+        const paragraphs = text.split("\n\n");
+        const formattedText = [];
+
+        for(let i=0;i<paragraphs.length;i++){
+            formattedText.push(paragraphs[i].split(" ")); 
+        }
+
+        return JSON.stringify(formattedText);
+    };
+
   return (
-    <div>
+    <div className="container">
         <h1>Import</h1>
         <div>
-            <textarea name="" id=""
+            <textarea
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
         </div>

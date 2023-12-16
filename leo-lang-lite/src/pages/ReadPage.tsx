@@ -1,13 +1,20 @@
+import { useState } from "react";
 import useRouter from "../hooks/useRouter";
+import Reader from "../components/Reader";
+import Dictionary from "../components/Dictionary";
 
 const ReadPage = () => {
 
     const router = useRouter();
 
-    let text = "";
+    const [showDictionary, setShowDictionary] = useState(false);
+    const [currentPhrase, setCurrentPhrase] = useState("");
+
+    let text:string | string[][] = [["No content"]];
 
     const loadText = () => {
-        text = localStorage.getItem("text") || "";
+        checkData();
+        text = JSON.parse(localStorage.getItem("text") || "[['No Content']]");
     };
 
     const checkData = () => {
@@ -16,13 +23,12 @@ const ReadPage = () => {
         }
     }
 
-    checkData();
     loadText();
 
   return (
-    <div>
-        <h1>Read</h1>
-        <p>{text}</p>
+    <div className="container">
+        <Reader text={text} setPhrase={setCurrentPhrase} showDictionary={setShowDictionary}/>
+        <Dictionary phrase={currentPhrase} show={showDictionary}/>
     </div>
   )
 }

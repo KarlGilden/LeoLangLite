@@ -35,16 +35,31 @@ const ImportPage = () => {
     };
 
   return (
-    <div className="page-centered">
+    <div className="page flex flex-center-x">
         <div className='container'>
-            <h1>Import</h1>
+            <h1>Choose a premade story</h1>
             <p className='spacer-medium'></p>
+            <div className='stories-container'>
+                <div className='story-card'>
+
+                </div>
+                <div className='story-card'>
+
+                </div>
+                <div className='story-card'>
+
+                </div>
+            </div>
+            <p className='spacer-small'></p>
+            <h1>Or</h1>
+            <i>Import your own text</i>
+            <p className='spacer-small'></p>
             <textarea
                 className='input'
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
-            <p className='spacer-medium'></p>
-            <button className='btn btn-medium' onClick={()=>submit()}>
+            <p className='spacer-small'></p>
+            <button className='btn btn-medium btn-full' onClick={()=>submit()}>
                 Read!
             </button>
             <p>{error}</p>

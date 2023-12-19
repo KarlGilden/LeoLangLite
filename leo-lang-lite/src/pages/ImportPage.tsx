@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import useRouter from '../hooks/useRouter';
-import './css/ImportPage.css'
+import './css/ImportPage.css';
+import sampleStories from '../data/samples.json'
+
 const ImportPage = () => {
     const router = useRouter();
     
     const [text, setText] = useState<string>("");
     const [error, setError] = useState<string>("");
+    
 
     const submit = () => {
         if(textIsValid()){
@@ -34,20 +37,26 @@ const ImportPage = () => {
         return JSON.stringify(formattedText);
     };
 
+    const selectSampleStory = (index:number) => {
+        setText(sampleStories[index].text);
+    }
+
+    console.log(sampleStories)
+
   return (
     <div className="page flex flex-center-x">
         <div className='container'>
             <h1>Choose a premade story</h1>
             <p className='spacer-medium'></p>
             <div className='stories-container'>
-                <div className='story-card'>
-
+                <div onClick={()=>{selectSampleStory(0)}} id='story-1' className='story-card'>
+                    <img className='card-image' src={sampleStories[0].image} alt="" />
                 </div>
-                <div className='story-card'>
-
+                <div onClick={()=>{selectSampleStory(1)}} id='story-2' className='story-card'>
+                    <img className='card-image' src={sampleStories[1].image} alt="" />
                 </div>
-                <div className='story-card'>
-
+                <div onClick={()=>{selectSampleStory(2)}} id='story-3' className='story-card'>
+                    <img className='card-image' src={sampleStories[2].image} alt="" />
                 </div>
             </div>
             <p className='spacer-small'></p>
@@ -56,6 +65,7 @@ const ImportPage = () => {
             <p className='spacer-small'></p>
             <textarea
                 className='input'
+                value={text}
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
             <p className='spacer-small'></p>

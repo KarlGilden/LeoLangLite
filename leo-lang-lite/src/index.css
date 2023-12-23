@@ -40,11 +40,11 @@
   display: flex;
 }
 
-.flex-center-x{
+.justify-center{
   justify-content: center;
 }
 
-.flex-center-y{
+.align-center{
   align-items: center;
 }
 

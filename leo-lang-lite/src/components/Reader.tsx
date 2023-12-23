@@ -81,7 +81,7 @@ const Reader = ({text, showDictionary, setPhrase}:IProps) => {
     }
 
   return (
-    <div className='container'>
+    <div className='reader-wrapper'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (

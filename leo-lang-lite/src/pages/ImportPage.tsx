@@ -44,7 +44,7 @@ const ImportPage = () => {
     console.log(sampleStories)
 
   return (
-    <div className="page flex flex-center-x">
+    <div className="page flex justify-center">
         <div className='container'>
             <h1>Choose a premade story</h1>
             <p className='spacer-medium'></p>

@@ -26,7 +26,7 @@ const ReadPage = () => {
     loadText();
 
   return (
-    <div className="page-centered page">
+    <div className="page flex justify-center">
         <Reader text={text} setPhrase={setCurrentPhrase} showDictionary={setShowDictionary}/>
         <Dictionary phrase={currentPhrase} show={showDictionary}/>
     </div>

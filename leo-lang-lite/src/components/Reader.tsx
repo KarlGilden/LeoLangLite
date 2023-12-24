@@ -1,13 +1,16 @@
 import rangy from 'rangy';
 import './css/Reader.css';
+import { translate } from '../util/GoogleApi';
+import { TranslationResult } from '../types/GoogleTranslateAPI';
 
 interface IProps {
     text: string[][]
     showDictionary: (show:boolean)=>void
-    setPhrase: (phrase:string)=>void
+    setPhrase: (phrase:TranslationResult)=>void
+    setLoading: (loading:boolean)=>void
 }
 
-const Reader = ({text, showDictionary, setPhrase}:IProps) => {
+const Reader = ({text, showDictionary, setPhrase, setLoading}:IProps) => {
 
     let paragraphIndex = 0;
     let wordIndex = 0;
@@ -76,8 +79,13 @@ const Reader = ({text, showDictionary, setPhrase}:IProps) => {
 
     const define = async (phrase:string) => {
         showDictionary(true);
-        setPhrase(phrase);
-        console.log(phrase);
+        setLoading(true);
+        translate(phrase, "mi").then((res)=>{
+            setPhrase(res);
+            setLoading(false);
+        }).catch((error)=>{
+            console.log(error);
+        });
     }
 
   return (

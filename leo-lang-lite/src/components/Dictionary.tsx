@@ -1,14 +1,16 @@
+import { TranslationResult } from '../types/GoogleTranslateAPI'
 import './css/Dictionary.css'
 
 interface IProps {
     show: boolean
-    phrase: string
+    phrase: TranslationResult
+    loading: boolean
 }
 
-const Dictionary = ({show, phrase}:IProps) => {
+const Dictionary = ({show, phrase, loading}:IProps) => {
   return (
     <div className={`${show?"show":"hide"} dictionary`}>
-        <h1>{phrase}</h1>
+        <p>{!loading ? phrase.data.translations[0].translatedText : "Loading..."}</p>
     </div>
   )
 }

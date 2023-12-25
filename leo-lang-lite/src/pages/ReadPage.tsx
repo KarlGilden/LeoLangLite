@@ -8,6 +8,7 @@ const ReadPage = () => {
 
     const router = useRouter();
 
+    const [loadingTranslation, setLoadingTranslation] = useState(false);
     const [showDictionary, setShowDictionary] = useState(false);
     const [currentPhrase, setCurrentPhrase] = useState<TranslationResult>({
         data: {
@@ -16,8 +17,6 @@ const ReadPage = () => {
             }]
         }
     });
-
-    const [loadingTranslation, setLoadingTranslation] = useState(false);
 
     let text:string | string[][] = [["No content"]];
 

@@ -1,16 +1,18 @@
 import useRouter from "../hooks/useRouter"
-import './css/HomePage.css'
 
 const HomePage = () => {
 
   const router = useRouter();
 
   return (
-    <div className="page-centered homepage page">
-      <div className="container text-centered">
-        <h1 className="large-heading">Learn Any Language With LeoLang</h1>
-        <p className="spacer-medium"></p>
-        <button onClick={()=>{router.navigate("/import")}} className="btn btn-medium">
+    <div className="flex justify-center items-center bg-blue-100 h-screen">
+      <div className="max-w-[800px] flex flex-col items-center">
+        <h1 className="text-5xl text-blue-500">Learn Any Language With LeoLang</h1>
+        <p className="p-3"></p>
+        <button 
+          onClick={()=>{router.navigate("/import")}} 
+          className="text-xl bg-blue-900 text-white py-3 px-6 rounded-[3px]"
+          >
           Get Reading!
         </button>
       </div>

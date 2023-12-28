@@ -5,9 +5,9 @@ export function translate(word:string, iso:string){
     return new Promise<TranslationResult>((resolve, reject) => {
         if(typeof word !== "string" || typeof iso !== "string") return "Error occured";
 
-        console.log(import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY);
-        let url = `https://translation.googleapis.com/language/translate/v2?key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`;
-        url += '&q=' + encodeURI(word);
+        let url = `https://translation.googleapis.com/language/translate/v2?`;
+        url += `&key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`
+        url += `&q=${encodeURI(word)}`;
         url += `&source=${iso}`;
         url += `&target=${"en"}`;
         url += `&format=text`

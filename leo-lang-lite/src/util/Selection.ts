@@ -24,7 +24,8 @@ export const hightlightText = (wrapper: HTMLSpanElement) => {
     const start = document.getElementById(startId)
 
     // create wrapper and add class styles
-    wrapper.classList.add("word-highlight")
+    wrapper.classList.add("selected-text");
+    wrapper.id = "selected-text"
 
     // null check
     if(!start?.parentElement) return;
@@ -46,7 +47,9 @@ export const hightlightText = (wrapper: HTMLSpanElement) => {
     // get phrase
     const phrase = wrapper.textContent || "";
 
-    
-
-    return phrase;
+    return formatWord(phrase);
 }
+
+export const formatWord = (str:string) => {
+    return str.replace(/[^a-z0-9 āēīōū]/gi, '').toLowerCase();
+};

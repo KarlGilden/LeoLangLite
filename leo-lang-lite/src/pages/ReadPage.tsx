@@ -1,43 +1,138 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useRouter from "../hooks/useRouter";
 import Reader from "../components/Reader";
 import Dictionary from "../components/Dictionary";
-import { TranslationResult } from "../types/GoogleTranslateAPI";
+import { Translation } from "../types/GoogleTranslateAPI";
+import { translate } from "../util/GoogleApi";
+import PhraseListDialog from "../components/PhraseListDialog";
 
 const ReadPage = () => {
 
     const router = useRouter();
 
+    const [text, setText] = useState([["No content"]]);
+    const [phraseList, setPhraseList] = useState<Translation[]>([]);
     const [loadingTranslation, setLoadingTranslation] = useState(false);
-    const [showDictionary, setShowDictionary] = useState(false);
-    const [currentPhrase, setCurrentPhrase] = useState<TranslationResult>({
-        data: {
-            translations: [{
-                translatedText: ""
-            }]
-        }
-    });
+    const [originalPhrase, setOriginalPhrase] = useState("");
+    const [translatedPhrase, setTranslatedPhrase] = useState("");
+    const [phraseListOpen, setPhraseListOpen] = useState(false);
 
-    let text:string | string[][] = [["No content"]];
-
-    const loadText = () => {
+    useEffect(()=>{
         checkData();
-        text = JSON.parse(localStorage.getItem("text") || "[['No Content']]");
+        const text = getText();
+        setText(text);
+    },[]);
+
+    const addWordToList = (phrase:Translation) => {
+        if(phrase.original && phrase.translation){
+            setPhraseList([...phraseList, phrase]);
+        }
+    };
+
+    const getText = () => {
+        return JSON.parse(localStorage.getItem("text") || "[['No Content']]");
     };
 
     const checkData = () => {
         if(!localStorage.getItem("text")){
             router.navigate('/import');
         }
+    };
+
+    const showPhraseList = () => {
+        console.log(phraseList)
+        if(phraseList.length > 0){
+            setPhraseListOpen(true);
+        }
     }
 
-    loadText();
+    const getTranslation = async (phrase:string) => {
+
+        return new Promise<string>((resolve, reject) => {
+
+            for(let i=0;i<phraseList.length;i++){
+                if(phraseList[i].original === phrase){
+                    return resolve(phraseList[i].translation);
+                }
+            }
+
+            translate(phrase, "mi").then((res)=>{
+                console.log(res)
+                return resolve(res.data.translations[0].translatedText);
+            }).catch((error)=>{
+                console.log(error);
+                return reject(error);
+            });
+        });
+        
+    }
+
+    const define = async (phrase:string) => {
+        setLoadingTranslation(true);
+        setOriginalPhrase(phrase);
+        const translation = await getTranslation(phrase);
+
+        if(!translation) return;
+        setTranslatedPhrase(translation);
+
+        setLoadingTranslation(false)
+    }
+
+    const formatExportContent = () => {
+        let returnString = "";
+
+        for(let i=0;i<phraseList.length;i++){
+            returnString += `${phraseList[i].original};${phraseList[i].translation}\n`
+        }
+
+        return returnString;
+    };
+
+    const createExportFile = () => {
+        const content = formatExportContent();
+
+        const link = document.createElement('a');
+
+        // Create a blog object with the file content which you want to add to the file
+        const file = new Blob([content], { type: 'text/plain' });
+
+        // Add file content in the object URL
+        link.href = URL.createObjectURL(file);
+
+        // Add file name
+        link.download = "sample.txt";
+
+        // Add click event to <a> tag to save file.
+        link.click();
+        URL.revokeObjectURL(link.href);
+    }
+
+    // add event listener to remove selection on click away
+    document.addEventListener('mousedown', function(e) {
+        const wrapper = document.getElementById("selected-text");
+        if(!e.target) return;
+        if(wrapper){
+            if (!wrapper.contains(e.target as HTMLElement)) {
+                wrapper.replaceWith(...wrapper.childNodes)
+            }
+        }
+        });
 
   return (
-    <div className="page flex justify-center">
-        <Reader text={text} setLoading={setLoadingTranslation} setPhrase={setCurrentPhrase} showDictionary={setShowDictionary}/>
-        <Dictionary loading={loadingTranslation} phrase={currentPhrase} show={showDictionary}/>
+    <>
+        <div className="p-24 bg-blue-100 h-screen">
+        <div className="flex w-full py-5">
+                <button className="py-2 px-6 rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Phrase list <span className="font-semibold ml-2">{phraseList.length}</span></button>
+            </div>
+        <div className="">
+            <Reader text={text} define={define}/>
+            <Dictionary loading={loadingTranslation} original={originalPhrase} translated={translatedPhrase} setTranslated={setTranslatedPhrase} addWord={addWordToList}/>
+        </div>
     </div>
+    <PhraseListDialog open={phraseListOpen} setOpen={setPhraseListOpen} phraseList={phraseList} exportFile={createExportFile}/>
+    </>
+
+
   )
 }
 

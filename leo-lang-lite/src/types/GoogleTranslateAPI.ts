@@ -7,3 +7,8 @@ export type TranslationResult = {
         ]
     }
 }
+
+export type Translation = {
+    original: string
+    translation: string
+}

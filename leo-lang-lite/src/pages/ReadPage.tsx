@@ -7,7 +7,7 @@ import { translate } from "../util/GoogleApi";
 import PhraseListDialog from "../components/PhraseListDialog";
 
 const ReadPage = () => {
-
+    console.log('render')
     const router = useRouter();
 
     const [text, setText] = useState([["No content"]]);
@@ -19,14 +19,47 @@ const ReadPage = () => {
 
     useEffect(()=>{
         checkData();
-        const text = getText();
-        setText(text);
+        setText(getText());
     },[]);
 
-    const addWordToList = (phrase:Translation) => {
+    const addPhraseToList = (phrase:Translation) => {
         if(phrase.original && phrase.translation){
             setPhraseList([...phraseList, phrase]);
         }
+    };
+
+    const updatePhraseInList = (phrase:Translation) => {
+        if(phrase.original && phrase.translation){
+            const index = indexOfPhrase(phrase);
+            const tempPhraseList = phraseList.map((p, i) => {
+                if (i === index) {
+                  return {original: phrase.original, translation: phrase.translation};
+                } else {
+                  return p;
+                }
+              });
+            setPhraseList(tempPhraseList);
+        }
+    };
+
+    const removePhraseFromList = (phrase:Translation) => {
+        if(phrase.original && phrase.translation){
+            setPhraseList(phraseList.filter(p => p.original !== phrase.original));
+        }
+    };
+    
+    const indexOfPhrase = (phrase:string | Translation) => {
+        if(typeof phrase !== 'string'){
+            phrase = phrase.original;
+        }
+        let index = -1;
+        for(let i=0;i<phraseList.length;i++){
+            if(phraseList[i]. original === phrase){
+                index = i;
+                break;
+            }
+        }
+        return index;
     };
 
     const getText = () => {
@@ -126,7 +159,16 @@ const ReadPage = () => {
             </div>
         <div className="">
             <Reader text={text} define={define}/>
-            <Dictionary loading={loadingTranslation} original={originalPhrase} translated={translatedPhrase} setTranslated={setTranslatedPhrase} addWord={addWordToList}/>
+            <Dictionary 
+                loading={loadingTranslation}
+                original={originalPhrase} 
+                translated={translatedPhrase} 
+                phraseIsSaved={indexOfPhrase(originalPhrase) >= 0}
+                setTranslated={setTranslatedPhrase} 
+                addPhrase={addPhraseToList}
+                updatePhrase={updatePhraseInList}
+                removePhrase={removePhraseFromList}
+            />
         </div>
     </div>
     <PhraseListDialog open={phraseListOpen} setOpen={setPhraseListOpen} phraseList={phraseList} exportFile={createExportFile}/>

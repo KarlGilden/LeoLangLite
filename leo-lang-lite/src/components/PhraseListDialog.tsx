@@ -19,19 +19,22 @@ const PhraseListDialog = ({open, setOpen, phraseList, exportFile}:IProps) => {
             </div>
             <div className="dialog-content p-5">
                 <table>
-                    <tr className="">
-                        <th className="text-left p-2 border-[1px]">Original</th>
-                        <th className="text-left p-2 border-[1px]">Translation</th>
-                    </tr>
-
-                    {phraseList?.map((value, index)=>{
-                    return (
-                        <tr key={"r"+index}>
-                            <td key={"o"+index} className="p-2 border-[1px]">{value.original}</td>
-                            <td key={"t"+index} className="p-2 border-[1px]">{value.translation}</td>
+                    <thead>
+                        <tr>
+                            <td className="text-left p-2 border-[1px]">Original</td>
+                            <td className="text-left p-2 border-[1px]">Translation</td>
                         </tr>
-                    )
-                })}
+                    </thead>
+                    <tbody>
+                        {phraseList?.map((value, index)=>{
+                        return (
+                            <tr key={"r"+index}>
+                                <td key={"o"+index} className="p-2 border-[1px]">{value.original}</td>
+                                <td key={"t"+index} className="p-2 border-[1px]">{value.translation}</td>
+                            </tr>
+                        )
+                        })}
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { hightlightText } from '../util/Selection';
 
 interface IProps {
@@ -24,10 +25,10 @@ const Reader = ({text, define}:IProps) => {
             paragraphIndex++;
             return (
                 <div className='paragraph' key={`p${paragraphIndex}`} onMouseUp={handleSelect} id={`p${paragraphIndex}`}>
-                    {paragraph.map((word)=>{
+                    {paragraph.map((word, index)=>{
                         wordIndex++;
                         return (
-                            <><span className='flex inline-flex items-center' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span> </>
+                            <Fragment key={"f"+index}><span className='flex inline-flex items-center' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span> </Fragment>
                         )
                     })}
                 </div>

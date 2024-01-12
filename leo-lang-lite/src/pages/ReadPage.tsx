@@ -155,7 +155,7 @@ const ReadPage = () => {
 
   return (
     <>
-        <div className="px-5 py-28 flex flex-col items-center">
+        <div className="px-5 pt-16 pb-28 flex flex-col items-center">
             <div className="flex w-full max-w-[600px] py-4">
                 <button className="py-1 px-4 text-sm rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Saved <span className="font-semibold ml-2">{phraseList.length}</span></button>
             </div>

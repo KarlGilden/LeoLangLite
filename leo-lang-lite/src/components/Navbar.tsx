@@ -4,7 +4,7 @@ import LinkedinIcon from './icons/LinkedinIcon';
 
 const Navbar = () => {
   return (
-    <header className='absolute w-full h-16 flex justify-between items-center py-2 px-16 bg-blue-500 shadow-container'>
+    <header className='absolute w-full h-16 flex justify-between items-center py-2 sm:px-16 px-5 bg-blue-500 shadow-container'>
         <a href="/">
           <div className='flex items-center'>
             <LeoIcon/>

@@ -5,7 +5,7 @@ const HomePage = () => {
   const router = useRouter();
 
   return (
-    <div className="flex justify-center items-center bg-blue-100 h-screen">
+    <div className="flex justify-center items-center bg-blue-100 h-screen text-center">
       <div className="max-w-[800px] flex flex-col items-center">
         <h1 className="text-5xl text-blue-500">Learn Any Language With LeoLang</h1>
         <p className="p-3"></p>

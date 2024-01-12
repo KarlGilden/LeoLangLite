@@ -155,23 +155,23 @@ const ReadPage = () => {
 
   return (
     <>
-        <div className="p-24 bg-blue-100 h-screen">
-        <div className="flex w-full py-5">
-                <button className="py-2 px-6 rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Phrase list <span className="font-semibold ml-2">{phraseList.length}</span></button>
+        <div className="px-5 py-16 h-screen flex flex-col items-center">
+            <div className="flex w-full max-w-[600px] py-4">
+                <button className="py-1 px-4 text-sm rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Saved <span className="font-semibold ml-2">{phraseList.length}</span></button>
             </div>
-        <div className="flex justify-center">
-            <Reader text={text} define={define}/>
-            <Dictionary 
-                loading={loadingTranslation}
-                original={originalPhrase} 
-                translated={translatedPhrase} 
-                phraseIsSaved={indexOfPhrase(originalPhrase) >= 0}
-                setTranslated={setTranslatedPhrase} 
-                addPhrase={addPhraseToList}
-                updatePhrase={updatePhraseInList}
-                removePhrase={removePhraseFromList}
-            />
-        </div>
+            <div className="flex justify-center">
+                <Reader text={text} define={define}/>
+                <Dictionary 
+                    loading={loadingTranslation}
+                    original={originalPhrase} 
+                    translated={translatedPhrase} 
+                    phraseIsSaved={indexOfPhrase(originalPhrase) >= 0}
+                    setTranslated={setTranslatedPhrase} 
+                    addPhrase={addPhraseToList}
+                    updatePhrase={updatePhraseInList}
+                    removePhrase={removePhraseFromList}
+                />
+            </div>
     </div>
     <PhraseListDialog open={phraseListOpen} setOpen={setPhraseListOpen} phraseList={phraseList} exportFile={createExportFile}/>
     </>

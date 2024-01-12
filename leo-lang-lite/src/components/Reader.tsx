@@ -26,17 +26,17 @@ const Reader = ({text, define}:IProps) => {
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (
-                <>
+                <Fragment key={"f1"+paragraph}>
                 <div className='paragraph select-text' key={`p${paragraphIndex}`} onMouseUp={handleSelect} id={`p${paragraphIndex}`}>
                     {paragraph.map((word, index)=>{
                         wordIndex++;
                         return (
-                            <Fragment key={"f"+index}><span className='flex inline-flex items-center' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span> </Fragment>
+                            <Fragment key={"f2"+index}><span className='flex inline-flex items-center' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span> </Fragment>
                         )
                     })}
                 </div>
                 <br />
-                </>
+                </Fragment>
             )
         })}
     </div>

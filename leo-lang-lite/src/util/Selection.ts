@@ -2,12 +2,18 @@ import rangy from 'rangy';
 
 export const hightlightText = (wrapper: HTMLSpanElement) => {
 
-    //get selected text ids
+    // get selected text ids
     const selection = rangy.getSelection().getRangeAt(0)
 
+    window.getSelection()?.removeAllRanges();
     // get parent elements for start and end elements
-    const startParentElement = selection.startContainer.parentElement
-    const endParentElement = selection.endContainer.parentElement
+
+    const startParentElement = selection.startContainer.nodeValue === " " ? selection.startContainer.nextSibling as HTMLElement: selection.startContainer.parentElement
+    const endParentElement = selection.endContainer.nodeValue === " " ? selection.endContainer.previousSibling as HTMLElement: selection.endContainer.parentElement
+
+    if(startParentElement?.parentElement?.id === "selected-text"){
+        return startParentElement.parentElement?.replaceWith(...startParentElement.parentElement.childNodes);
+    }
 
     // null check
     if(!startParentElement || !endParentElement) return;
@@ -17,8 +23,8 @@ export const hightlightText = (wrapper: HTMLSpanElement) => {
     const endId = endParentElement.id
 
     // get indexes as ints
-    const startIndex = startId.substring(1)
-    const endIndex = endId.substring(1)
+    const startIndex = parseInt(startId.substring(1));
+    const endIndex = parseInt(endId.substring(1));
 
     // get start element
     const start = document.getElementById(startId)
@@ -27,6 +33,7 @@ export const hightlightText = (wrapper: HTMLSpanElement) => {
     wrapper.classList.add("selected-text");
     wrapper.id = "selected-text"
 
+
     // null check
     if(!start?.parentElement) return;
 
@@ -34,12 +41,12 @@ export const hightlightText = (wrapper: HTMLSpanElement) => {
     start.parentElement.insertBefore(wrapper, start)
 
     // pack words into wrapper
-    for(let i:number=parseInt(startIndex);i<=parseInt(endIndex);i++){
+    for(let i:number=startIndex;i<=endIndex;i++){
         const toAppend = document.getElementById("w"+i)
         const nextSibling = toAppend?.nextSibling;
         if(!toAppend) return
         wrapper.appendChild(toAppend)
-        if(nextSibling && i !== parseInt(endIndex)){
+        if(nextSibling && i !== endIndex){
             wrapper.appendChild(nextSibling)
         }
     }

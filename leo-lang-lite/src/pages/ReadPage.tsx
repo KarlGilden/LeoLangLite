@@ -103,6 +103,8 @@ const ReadPage = () => {
     const define = async (phrase:string) => {
         setLoadingTranslation(true);
         setOriginalPhrase(phrase);
+        setTranslatedPhrase("");
+        
         const translation = await getTranslation(phrase);
 
         if(!translation) return;

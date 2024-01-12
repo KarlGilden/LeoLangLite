@@ -12,6 +12,8 @@ const Reader = ({text, define}:IProps) => {
     let wordIndex = 0;
 
     const handleSelect = () => {
+        const currentWrapper = document.getElementById("selected-text");
+        currentWrapper?.replaceWith(...currentWrapper.childNodes);
         const wrapper = document.createElement("span")
         const phrase = hightlightText(wrapper) || "";
 
@@ -20,11 +22,11 @@ const Reader = ({text, define}:IProps) => {
     };
 
   return (
-    <div className='reader-wrapper'>
+    <div className='reader-wrapper select-text'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (
-                <div className='paragraph' key={`p${paragraphIndex}`} onMouseUp={handleSelect} id={`p${paragraphIndex}`}>
+                <div className='paragraph select-text' key={`p${paragraphIndex}`} onMouseUp={handleSelect} id={`p${paragraphIndex}`}>
                     {paragraph.map((word, index)=>{
                         wordIndex++;
                         return (

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { hightlightText } from '../util/Selection';
+import { selectAndGetText, removeHighlight } from '../util/Selection';
 
 interface IProps {
     text: string[][]
@@ -12,20 +12,21 @@ const Reader = ({text, define}:IProps) => {
     let wordIndex = 0;
 
     const handleSelect = () => {
-        const currentWrapper = document.getElementById("selected-text");
-        currentWrapper?.replaceWith(...currentWrapper.childNodes);
-        const wrapper = document.createElement("span")
-        const phrase = hightlightText(wrapper) || "";
+        removeHighlight();
+        
+        const phrase = selectAndGetText();
 
-        // send phrase to dictionary
-        define(phrase.replace("\n", ""))
+        if(phrase){
+            define(phrase.replace("\n", ""))
+        }
     };
 
   return (
-    <div className='reader-wrapper select-text'>
+    <div className='max-w-[600px] reader-wrapper select-text'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (
+                <>
                 <div className='paragraph select-text' key={`p${paragraphIndex}`} onMouseUp={handleSelect} id={`p${paragraphIndex}`}>
                     {paragraph.map((word, index)=>{
                         wordIndex++;
@@ -34,6 +35,8 @@ const Reader = ({text, define}:IProps) => {
                         )
                     })}
                 </div>
+                <br />
+                </>
             )
         })}
     </div>

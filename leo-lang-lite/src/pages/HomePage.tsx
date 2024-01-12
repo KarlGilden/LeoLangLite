@@ -11,7 +11,7 @@ const HomePage = () => {
         <p className="p-3"></p>
         <button 
           onClick={()=>{router.navigate("/import")}} 
-          className="text-xl bg-blue-900 text-white py-3 px-6 rounded-[3px]"
+          className="text-xl bg-black text-white py-3 px-6 rounded-[3px]"
           >
           Get Reading!
         </button>

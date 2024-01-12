@@ -6,7 +6,9 @@ export default {
   ],
   theme: {
     colors: {
+      white: "#fff",
       black: {
+        DEFAULT: "#000",
         blur: "rgba(0,0,0,0.5)"
       }
     },

@@ -104,7 +104,7 @@ const ReadPage = () => {
         setLoadingTranslation(true);
         setOriginalPhrase(phrase);
         setTranslatedPhrase("");
-        
+
         const translation = await getTranslation(phrase);
 
         if(!translation) return;
@@ -159,7 +159,7 @@ const ReadPage = () => {
         <div className="flex w-full py-5">
                 <button className="py-2 px-6 rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Phrase list <span className="font-semibold ml-2">{phraseList.length}</span></button>
             </div>
-        <div className="">
+        <div className="flex justify-center">
             <Reader text={text} define={define}/>
             <Dictionary 
                 loading={loadingTranslation}

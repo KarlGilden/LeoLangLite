@@ -17,7 +17,7 @@ const Dictionary = ({original, translated, phraseIsSaved, addPhrase, updatePhras
   const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
 
   return (
-    <div id='dictionary' className="fixed bottom-0 right-0 left-0 p-5">
+    <div id='dictionary' className="fixed bottom-0 right-0 left-0 py-2 px-5 bg-white shadow-container">
         <p className='font-bold text-xl'>{original ? original : "Select a phrase to start"}</p>
         
         <p className='p-1'></p>

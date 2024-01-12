@@ -43,7 +43,7 @@ const ImportPage = () => {
     console.log(sampleStories)
 
   return (
-    <div className="flex justify-center w-full h-screen p-24 bg-blue-100">
+    <div className="flex justify-center w-full min-h-screen p-24 bg-blue-100">
         <div className='p-10 w-full flex flex-col items-center max-w-[600px]'>
             <h1 className='text-3xl'>Choose a premade story</h1>
             <p className='p-5'></p>
@@ -68,7 +68,7 @@ const ImportPage = () => {
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
             <p className='p-2'></p>
-            <button className='py-2 px-4 text-xl bg-blue-900 text-white rounded-[5px]' onClick={()=>submit()}>
+            <button className='py-2 px-4 text-xl bg-black text-white rounded-[5px]' onClick={()=>submit()}>
                 Read!
             </button>
             <p>{error}</p>

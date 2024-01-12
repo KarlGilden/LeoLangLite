@@ -1,62 +1,70 @@
 import rangy from 'rangy';
 
-export const hightlightText = (wrapper: HTMLSpanElement) => {
+export const selectAndGetText = () => {
 
-    // get selected text ids
     const selection = rangy.getSelection().getRangeAt(0)
-
     window.getSelection()?.removeAllRanges();
-    // get parent elements for start and end elements
 
-    const startParentElement = selection.startContainer.nodeValue === " " ? selection.startContainer.nextSibling as HTMLElement: selection.startContainer.parentElement
-    const endParentElement = selection.endContainer.nodeValue === " " ? selection.endContainer.previousSibling as HTMLElement: selection.endContainer.parentElement
+    const startNode = selection.startContainer.nodeValue === " " ? selection.startContainer.nextSibling as HTMLElement: selection.startContainer.parentElement;
+    const endNode = selection.endContainer.nodeValue === " " ? selection.endContainer.previousSibling as HTMLElement: selection.endContainer.parentElement;
+    const containerNode = startNode?.parentElement;
 
-    if(startParentElement?.parentElement?.id === "selected-text"){
-        return startParentElement.parentElement?.replaceWith(...startParentElement.parentElement.childNodes);
+    if(!startNode || !endNode || !containerNode) return;
+
+    // if selection starts within a selected text
+    if(containerNode.id === "selected-text"){
+        return startNode.parentElement?.replaceWith(...startNode.parentElement.childNodes);
     }
 
-    // null check
-    if(!startParentElement || !endParentElement) return;
+    const highlight = _createAndReturnHighlight();
 
-    // get ids
-    const startId = startParentElement.id
-    const endId = endParentElement.id
+    _highlightText(startNode, endNode, containerNode, highlight);
 
-    // get indexes as ints
-    const startIndex = parseInt(startId.substring(1));
-    const endIndex = parseInt(endId.substring(1));
+    return formatWord(highlight.textContent);
+}
 
-    // get start element
-    const start = document.getElementById(startId)
+export const formatWord = (str:string | null) => {
+    if(!str) return "";
+    return str.replace(/[^a-z0-9 āēīōū]/gi, '').toLowerCase();
+};
 
-    // create wrapper and add class styles
-    wrapper.classList.add("selected-text");
-    wrapper.id = "selected-text"
+export const removeHighlight = () => {
+    const currenthighlight = document.getElementById("selected-text");
+    if(currenthighlight){
+        currenthighlight?.replaceWith(...currenthighlight.childNodes);
+    }
+};
 
+const _createAndReturnHighlight = () => {
+    const highlight = document.createElement("span")
+    highlight.classList.add("selected-text");
+    highlight.id = "selected-text"
 
-    // null check
-    if(!start?.parentElement) return;
+    return highlight
+}
 
-    // insert wrapper node
-    start.parentElement.insertBefore(wrapper, start)
+const _highlightText = (startNode:HTMLElement, endNode: HTMLElement, containerNode:HTMLElement, highlight:HTMLElement) => {
+   
+    // get ids as integers "w1" -> 1
+    const startIndex = parseInt(startNode.id.substring(1));
+    const endIndex = parseInt(endNode.id.substring(1));
 
-    // pack words into wrapper
+    // insert
+    containerNode.insertBefore(highlight, startNode)
+
+    // pack children
     for(let i:number=startIndex;i<=endIndex;i++){
         const toAppend = document.getElementById("w"+i)
         const nextSibling = toAppend?.nextSibling;
-        if(!toAppend) return
-        wrapper.appendChild(toAppend)
+
+        if(toAppend && toAppend?.parentElement?.id === containerNode.id){
+            highlight.appendChild(toAppend)
+        }else{
+            return removeHighlight();
+        };
+
         if(nextSibling && i !== endIndex){
-            wrapper.appendChild(nextSibling)
+            highlight.appendChild(nextSibling)
         }
     }
-
-    // get phrase
-    const phrase = wrapper.textContent || "";
-
-    return formatWord(phrase);
 }
-
-export const formatWord = (str:string) => {
-    return str.replace(/[^a-z0-9 āēīōū]/gi, '').toLowerCase();
-};

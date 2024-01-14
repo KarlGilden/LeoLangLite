@@ -10,6 +10,9 @@ export default {
       black: {
         DEFAULT: "#000",
         blur: "rgba(0,0,0,0.5)"
+      },
+      gray: {
+        DEFAULT: "#f3f4f6"
       }
     },
     extend: {

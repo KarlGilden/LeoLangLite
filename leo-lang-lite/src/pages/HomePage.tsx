@@ -1,5 +1,4 @@
 import useRouter from "../hooks/useRouter"
-import { FaLongArrowAltRight } from "react-icons/fa";
 
 const HomePage = () => {
 

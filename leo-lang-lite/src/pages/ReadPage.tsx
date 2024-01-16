@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useRouter from "../hooks/useRouter";
 import Reader from "../components/Reader";
 import Dictionary from "../components/Dictionary";
@@ -7,19 +7,17 @@ import { translate } from "../util/Translation";
 import PhraseListDialog from "../components/PhraseListDialog";
 
 const ReadPage = () => {
-    console.log('render')
+    console.log('page render')
     const router = useRouter();
 
-    const [text, setText] = useState([["No content"]]);
+    //const [text, setText] = useState([["No content"]]);
     const [phraseList, setPhraseList] = useState<DictionaryEntry[]>([]);
-    const [loadingTranslation, setLoadingTranslation] = useState(false);
-    const [originalPhrase, setOriginalPhrase] = useState("");
     const [currentPhrase, setCurrentPhrase] = useState<DictionaryEntry>({original:"", translations:[""]});
     const [phraseListOpen, setPhraseListOpen] = useState(false);
 
-    useEffect(()=>{
-        setText(getText());
-    },[]);
+    // useEffect(()=>{
+    //     setText(getText());
+    // },[]);
 
     const addPhraseToList = (translation:DictionaryEntry) => {
         if(translation.original && translation.translations.length > 0){
@@ -76,18 +74,12 @@ const ReadPage = () => {
     }
 
     const define = async (phrase:string) => {
-        setLoadingTranslation(true);
-        setOriginalPhrase(phrase);
-        setCurrentPhrase({original:"", translations:[""]});
+        setCurrentPhrase({original: phrase, translations:[""]})
 
         await translate(phrase, phraseList).then((translation)=>{
             if(!translation) return;
             setCurrentPhrase(translation);
-        }).catch(()=>{
-
-        });
-
-        setLoadingTranslation(false)
+        })
     }
 
     // add event listener to remove selection on click away
@@ -108,12 +100,10 @@ const ReadPage = () => {
                 <button className="py-1 px-4 text-sm rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Saved <span className="font-semibold ml-2">{phraseList.length}</span></button>
             </div>
             <div className="flex justify-center">
-                <Reader text={text} define={define}/>
+                <Reader text={getText()} define={define}/>
                 <Dictionary 
-                    loading={loadingTranslation}
-                    original={originalPhrase} 
                     currentPhrase={currentPhrase}
-                    phraseIsSaved={indexOfPhrase(originalPhrase) >= 0}
+                    phraseIsSaved={indexOfPhrase(currentPhrase) >= 0}
                     setCurrentPhrase={setCurrentPhrase} 
                     addPhrase={addPhraseToList}
                     updatePhrase={updatePhraseInList}

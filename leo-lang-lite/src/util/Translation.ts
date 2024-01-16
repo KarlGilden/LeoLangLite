@@ -22,7 +22,6 @@ function getGoogleTranslation(word:string){
         })
         .then(res => res.json())
         .then((response) => {
-          console.log(response);
             return resolve(_mapGoogleToDictionary(word, response));
         })
         .catch(error => {

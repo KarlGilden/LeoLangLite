@@ -2,9 +2,7 @@ import { DictionaryEntry } from '../types/TranslationTypes'
 import BtnDictionary from './buttons/BtnDictionary'
 
 interface IProps {
-    original: string
     currentPhrase: DictionaryEntry
-    loading: boolean
     phraseIsSaved: boolean
     addPhrase: (word:DictionaryEntry) => void
     updatePhrase: (word:DictionaryEntry) => void
@@ -12,13 +10,13 @@ interface IProps {
     setCurrentPhrase: (translations:DictionaryEntry)=>void
 }
 
-const Dictionary = ({original, currentPhrase, phraseIsSaved, addPhrase, updatePhrase, removePhrase, setCurrentPhrase}:IProps) => {
-  
+const Dictionary = ({currentPhrase, phraseIsSaved, addPhrase, updatePhrase, removePhrase, setCurrentPhrase}:IProps) => {
+
   const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
 
   return (
     <div id='dictionary' className="fixed bottom-0 right-0 left-0 py-2 px-5 bg-white shadow-container">
-        <p className='font-bold text-xl'>{original ? original : "Select a phrase to start"}</p>
+        <p className='font-bold text-xl'>{currentPhrase.original ? currentPhrase.original : "Select a phrase to start"}</p>
         
         <p className='p-1'></p>
 
@@ -29,10 +27,10 @@ const Dictionary = ({original, currentPhrase, phraseIsSaved, addPhrase, updatePh
                 type='text' 
                 value={currentPhrase.translations[0]} 
                 onChange={(e)=>{
-                  setCurrentPhrase({original:original, translations:[e.target.value]});
+                  setCurrentPhrase({original:currentPhrase.original, translations:[e.target.value]});
                 }} />
                 <p className='p-2'></p>
-                <a target='_blank' href={dictionaryBaseUrl + `/search?keywords=${original}`}>Search Te Aka</a>
+                <a target='_blank' href={dictionaryBaseUrl + `/search?keywords=${currentPhrase.original}`}>Search Te Aka</a>
           </div>
 
           <div>

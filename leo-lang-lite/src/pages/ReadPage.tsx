@@ -71,15 +71,7 @@ const ReadPage = () => {
     }
 
     // add event listener to remove selection on click away
-    document.addEventListener('mousedown', function(e) {
-        const wrapper = document.getElementById("selected-text");
-        if(!e.target) return;
-        if(wrapper){
-            if (!wrapper.contains(e.target as HTMLElement)) {
-                wrapper.replaceWith(...wrapper.childNodes)
-            }
-        }
-        });
+
 
   return (
     <div className="px-5 pt-16 pb-28 flex flex-col items-center">

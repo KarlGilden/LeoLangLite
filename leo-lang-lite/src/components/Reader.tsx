@@ -21,8 +21,18 @@ const Reader = ({text, define}:IProps) => {
         }
     };
 
+    const mouseDown = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const wrapper = document.getElementById("selected-text");
+        if(!e.target) return;
+        if(wrapper){
+            if (!wrapper.contains(e.target as HTMLElement)) {
+                wrapper.replaceWith(...wrapper.childNodes)
+            }
+        }
+    }
+
   return (
-    <div className='max-w-[600px] reader-wrapper select-text'>
+    <div onMouseDown={(e)=>mouseDown(e)} className='max-w-[600px] reader-wrapper select-text'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (

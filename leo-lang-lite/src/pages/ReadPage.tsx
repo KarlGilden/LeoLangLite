@@ -4,20 +4,14 @@ import Reader from "../components/Reader";
 import Dictionary from "../components/Dictionary";
 import { DictionaryEntry } from "../types/TranslationTypes";
 import { translate } from "../util/Translation";
-import PhraseListDialog from "../components/PhraseListDialog";
+import ReaderHeader from "../components/ReaderHeader";
 
 const ReadPage = () => {
     console.log('page render')
     const router = useRouter();
 
-    //const [text, setText] = useState([["No content"]]);
     const [phraseList, setPhraseList] = useState<DictionaryEntry[]>([]);
     const [currentPhrase, setCurrentPhrase] = useState<DictionaryEntry>({original:"", translations:[""]});
-    const [phraseListOpen, setPhraseListOpen] = useState(false);
-
-    // useEffect(()=>{
-    //     setText(getText());
-    // },[]);
 
     const addPhraseToList = (translation:DictionaryEntry) => {
         if(translation.original && translation.translations.length > 0){
@@ -67,12 +61,6 @@ const ReadPage = () => {
         return JSON.parse(localStorage.getItem("text") || "[['No Content']]");
     };
 
-    const showPhraseList = () => {
-        if(phraseList.length > 0){
-            setPhraseListOpen(true);
-        }
-    }
-
     const define = async (phrase:string) => {
         setCurrentPhrase({original: phrase, translations:[""]})
 
@@ -94,25 +82,20 @@ const ReadPage = () => {
         });
 
   return (
-    <>
-        <div className="px-5 pt-16 pb-28 flex flex-col items-center">
-            <div className="flex w-full max-w-[600px] py-4">
-                <button className="py-1 px-4 text-sm rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Saved <span className="font-semibold ml-2">{phraseList.length}</span></button>
-            </div>
-            <div className="flex justify-center">
-                <Reader text={getText()} define={define}/>
-                <Dictionary 
-                    currentPhrase={currentPhrase}
-                    phraseIsSaved={indexOfPhrase(currentPhrase) >= 0}
-                    setCurrentPhrase={setCurrentPhrase} 
-                    addPhrase={addPhraseToList}
-                    updatePhrase={updatePhraseInList}
-                    removePhrase={removePhraseFromList}
-                />
-            </div>
+    <div className="px-5 pt-16 pb-28 flex flex-col items-center">
+        <ReaderHeader phraseList={phraseList} />
+        <div className="flex justify-center">
+            <Reader text={getText()} define={define}/>
+            <Dictionary 
+                currentPhrase={currentPhrase}
+                phraseIsSaved={indexOfPhrase(currentPhrase) >= 0}
+                setCurrentPhrase={setCurrentPhrase} 
+                addPhrase={addPhraseToList}
+                updatePhrase={updatePhraseInList}
+                removePhrase={removePhraseFromList}
+            />
+        </div>
     </div>
-    <PhraseListDialog open={phraseListOpen} setOpen={setPhraseListOpen} phraseList={phraseList}/>
-    </>
   )
 }
 

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
-import { Translation } from '../../types/GoogleTranslateAPI'
+import { DictionaryEntry } from '../../types/TranslationTypes'
 
 interface IProps{
-    action: (word:Translation)=>void
-    input: Translation,
+    action: (word:DictionaryEntry)=>void
+    input: DictionaryEntry,
     children: ReactNode
 }
 

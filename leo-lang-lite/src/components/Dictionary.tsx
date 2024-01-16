@@ -1,18 +1,18 @@
-import { Translation } from '../types/GoogleTranslateAPI'
+import { DictionaryEntry } from '../types/TranslationTypes'
 import BtnDictionary from './buttons/BtnDictionary'
 
 interface IProps {
     original: string
-    translated: string
+    currentPhrase: DictionaryEntry
     loading: boolean
     phraseIsSaved: boolean
-    addPhrase: (word:Translation) => void
-    updatePhrase: (word:Translation) => void
-    removePhrase: (word:Translation) => void
-    setTranslated: (phrase:string)=>void
+    addPhrase: (word:DictionaryEntry) => void
+    updatePhrase: (word:DictionaryEntry) => void
+    removePhrase: (word:DictionaryEntry) => void
+    setCurrentPhrase: (translations:DictionaryEntry)=>void
 }
 
-const Dictionary = ({original, translated, phraseIsSaved, addPhrase, updatePhrase, removePhrase, setTranslated}:IProps) => {
+const Dictionary = ({original, currentPhrase, phraseIsSaved, addPhrase, updatePhrase, removePhrase, setCurrentPhrase}:IProps) => {
   
   const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
 
@@ -27,24 +27,25 @@ const Dictionary = ({original, translated, phraseIsSaved, addPhrase, updatePhras
             <input 
                 className='border-black border-[1px] rounded-[3px] px-1'
                 type='text' 
-                value={translated} 
+                value={currentPhrase.translations[0]} 
                 onChange={(e)=>{
-                  setTranslated(e.target.value);
+                  setCurrentPhrase({original:original, translations:[e.target.value]});
                 }} />
                 <p className='p-2'></p>
                 <a target='_blank' href={dictionaryBaseUrl + `/search?keywords=${original}`}>Search Te Aka</a>
           </div>
+
           <div>
             {!phraseIsSaved ? 
-                <BtnDictionary action={addPhrase} input={{original: original, translation: translated}}>
+                <BtnDictionary action={addPhrase} input={currentPhrase}>
                   Save
                 </BtnDictionary>
               :
               <>
-                <BtnDictionary action={updatePhrase} input={{original: original, translation: translated}}>
+                <BtnDictionary action={updatePhrase} input={currentPhrase}>
                   Update
                 </BtnDictionary>
-                <BtnDictionary action={removePhrase} input={{original: original, translation: translated}}>
+                <BtnDictionary action={removePhrase} input={currentPhrase}>
                   Delete
                 </BtnDictionary>
               </>

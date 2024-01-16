@@ -1,4 +1,4 @@
-export type TranslationResult = {
+export type GoogleTranslateResult = {
     data:{
         translations: [
             {
@@ -8,7 +8,7 @@ export type TranslationResult = {
     }
 }
 
-export type Translation = {
+export type DictionaryEntry = {
     original: string
-    translation: string
+    translations: string[]
 }

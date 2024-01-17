@@ -13,6 +13,15 @@ export default {
       },
       gray: {
         DEFAULT: "#f3f4f6"
+      },
+      red:{
+        DEFAULT: "#b91c1c"
+      },
+      orange: {
+        DEFAULT: "#d97706"
+      },
+      green: {
+        DEFAULT: "#4d7c0f"
       }
     },
     extend: {

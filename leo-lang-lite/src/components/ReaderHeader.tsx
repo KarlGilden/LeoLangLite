@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DictionaryEntry } from '../types/TranslationTypes';
 import PhraseListDialog from './PhraseListDialog';
+import { FaList } from "react-icons/fa";
 
 interface IProps {
     phraseList: DictionaryEntry[],
@@ -16,7 +17,7 @@ const ReaderHeader = ({phraseList}:IProps) => {
     }
   return (
     <div className="flex w-full max-w-[600px] py-4">
-        <button className="py-1 px-4 text-sm rounded-full bg-[#000] text-[#fff]" onClick={()=>{showPhraseList()}}>Saved <span className="font-semibold ml-2">{phraseList.length}</span></button>
+        <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{showPhraseList()}}><FaList className={"mr-2 text-xl"}/> Saved <span className="ml-2">{phraseList.length}</span></button>
         <PhraseListDialog open={phraseListOpen} setOpen={setPhraseListOpen} phraseList={phraseList}/>
     </div>
   )

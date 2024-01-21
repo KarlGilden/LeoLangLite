@@ -14,11 +14,11 @@ interface IProps {
 
 const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentPhrase, setPhraseList}:IProps) => {
 
-  //const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
+  const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
 
   const addPhraseToList = (translation:DictionaryEntry) => {
     if(translation.translations[0] === "") return;
-    
+
     if(translation.original && translation.translations.length > 0){
         setPhraseList([...phraseList, translation]);
     }
@@ -103,7 +103,6 @@ const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentP
           </div>
 
           <p className="p-1"></p>
-
           <DictionaryTranslations currentTranslations={currentTranslations} currentPhrase={currentPhrase} setCurrentPhrase={setCurrentPhrase}/>
         </div>
     </div>

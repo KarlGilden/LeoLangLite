@@ -1,3 +1,4 @@
+import LogoLink from "../components/LogoLink";
 import useRouter from "../hooks/useRouter"
 
 const HomePage = () => {
@@ -6,16 +7,26 @@ const HomePage = () => {
 
   return (
     <main>
-      <section className="flex justify-center h-screen items-center text-center">
-        <div className="max-w-[800px] flex flex-col items-center">
-          <h1 className="text-4xl sm:text-6xl">Learn Any Language With LeoLang</h1>
+      <section className="flex justify-center h-screen items-center px-5">
+        <div className="max-w-[800px] flex flex-col">
+          <LogoLink/>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl">Read te reo Māori with ease</h1>
           <p className="p-3"></p>
+          <div className="flex flex-col sm:flex-row">
           <button 
-            onClick={()=>{router.navigate("/import")}} 
-            className="text-xl bg-black text-white py-3 px-6 rounded-[3px]"
-            >
-            Get Reading!
-          </button>
+              onClick={()=>{router.navigate("/import")}} 
+              className="text-xl border-black border-2 bg-black text-white py-3 px-6 rounded-[3px]"
+              >
+              Get Reading!
+            </button>
+            <p className="p-2"></p>
+            <button 
+              onClick={()=>{router.scrollTo("info-section")}} 
+              className="text-xl border-black border-2 py-3 px-6 rounded-[3px]"
+              >
+              Learn more
+            </button>
+          </div>
         </div>
       </section>
 
@@ -29,7 +40,7 @@ export default HomePage
 
 const InfoSection = () => {
   return(
-    <section className="flex justify-center w-full p-5 sm:p-16 py-16 bg-gray">
+    <section id="info-section" className="flex justify-center w-full p-5 sm:p-16 py-16 bg-gray">
       <div className="flex flex-col sm:flex-row sm:items-center h-full">
         <div className="w-full">
           <h3 className="text-4xl font-bold">How it works</h3>

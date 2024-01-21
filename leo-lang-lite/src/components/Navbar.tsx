@@ -1,17 +1,11 @@
-import LeoIcon from './icons/LeoIcon';
 import GithubIcon from './icons/GithubIcon';
 import LinkedinIcon from './icons/LinkedinIcon';
+import LogoLink from './LogoLink';
 
 const Navbar = () => {
   return (
     <header className='absolute w-full h-16 flex justify-between items-center py-2 sm:px-16 px-5 bg-blue-500 shadow-container'>
-        <a href="/">
-          <div className='flex items-center'>
-            <LeoIcon/>
-            <p className='p-1'></p>
-            <h3 className='text-2xl pb-1'>LeoLang</h3>
-          </div>
-        </a>
+        <LogoLink/>
         <nav className='flex'>
           <a target='_blank' href="https://github.com/KarlGilden/LeoLangLite"><GithubIcon /></a>
           <p className='p-2'></p>

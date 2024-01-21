@@ -10,9 +10,17 @@ const useRouter = () => {
         window.location.href = path;
     };
 
+    const scrollTo = (id:string) => {
+        const section = document.getElementById(id);
+        if(!section) return;
+
+        section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+    }
+
     return {
         route: route,
-        navigate: navigate
+        navigate: navigate,
+        scrollTo: scrollTo
     }
 };
 

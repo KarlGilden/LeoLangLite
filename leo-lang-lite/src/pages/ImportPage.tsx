@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useRouter from '../hooks/useRouter';
 import sampleStories from '../data/samples.json'
+import { updateText } from '../data/services/lessonService';
 
 const ImportPage = () => {
     const router = useRouter();
@@ -9,31 +10,12 @@ const ImportPage = () => {
     const [error, setError] = useState<string>("");
     
 
-    const submit = () => {
-        if(textIsValid()){
-            const formattedText = buildText();
-            localStorage.setItem("text", formattedText);
+    const submit = async () => {
+        await updateText(text).then(()=>{
             router.navigate("/read");
-        }
-    };
-
-    const textIsValid = () => {
-        if(text === ""){
-            setError("Please enter all fields");
-            return false;
-        }
-        return true;
-    };
-
-    const buildText = () => {
-        const paragraphs = text.split("\n\n");
-        const formattedText = [];
-
-        for(let i=0;i<paragraphs.length;i++){
-            formattedText.push(paragraphs[i].split(" ")); 
-        }
-
-        return JSON.stringify(formattedText);
+        }).catch(()=>{
+            setError("Please enter all fields")
+        })
     };
 
     const selectSampleStory = (index:number) => {

@@ -14,8 +14,6 @@ interface IProps {
 
 const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentPhrase, setPhraseList}:IProps) => {
 
-  const dictionaryBaseUrl = "https://www.maoridictionary.co.nz";
-
   const addPhraseToList = (translation:DictionaryEntry) => {
     if(translation.translations[0] === "") return;
 

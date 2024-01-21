@@ -10,8 +10,8 @@ interface IProps {
 
 const PhraseListDialog = ({open, setOpen, phraseList}:IProps) => {
   return (
-    <div className={`${open ? "block":"hidden"} p-5 flex justify-center items-center h-content fixed top-0 bottom-0 right-0 left-0 bg-black-blur z-10`}>
-        <div className="bg-white h-full p-5 overflow-y-scroll rounded-[5px] sm:w-[50%] w-[90%]">
+    <div className={`${open ? "block":"hidden"} p-2 flex justify-center items-center h-content fixed top-0 bottom-0 right-0 left-0 bg-black-blur z-10`}>
+        <div className="bg-white w-full h-full p-5 overflow-y-scroll rounded-[5px] md:w-[50%]">
             <div className="dialog-header flex items-center justify-between">
                 <button onClick={()=>{setOpen(false)}} className="text-2xl"><FaTimes className="text-3xl" /></button>
                 <p className="p-2"></p>

@@ -10,4 +10,5 @@ This is a lightweight demo with the goal of featuring the reading tool and dicti
 ## Why reading?
 The premise of reading is based on Steven Crashens theory of comprehensible input. The theory places an emphasis on input of the target language rather than grammar instruction and tests. Reading, especially when paired with audio, is a great way of getting input and exposing yourself to as many Māori words and phrases as possible.
 
+## Example
 ![demo](https://github.com/KarlGilden/LeoLangLite/assets/45926924/0e6905c2-bf06-47f3-9640-b9f1be786788)

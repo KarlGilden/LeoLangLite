@@ -6,6 +6,7 @@ import { DictionaryEntry } from "../types/TranslationTypes";
 import { translate } from "../util/Translation";
 import ReaderHeader from "../components/ReaderHeader";
 import {fetchText} from '../data/services/lessonService';
+import ReaderNav from "../components/ReaderNav";
 
 const ReadPage = () => {
     const router = useRouter();
@@ -39,7 +40,8 @@ const ReadPage = () => {
     }
 
   return (
-    <div className="px-5 pt-24 pb-28 flex flex-col items-center">
+    <div className="px-5 pb-28 flex flex-col items-center">
+        <ReaderNav />
         <ReaderHeader phraseList={phraseList} />
         <div className="flex justify-center">
             <Reader text={text} define={define}/>

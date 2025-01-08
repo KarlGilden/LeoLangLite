@@ -6,6 +6,10 @@ const useRouter = () => {
         return routes[path];
     };
 
+    const currentRoute = () => {
+        return window.location.pathname;
+    }
+
     const navigate = (path:string) => {
         window.location.href = path;
     };
@@ -19,6 +23,7 @@ const useRouter = () => {
 
     return {
         route: route,
+        currentRoute: currentRoute,
         navigate: navigate,
         scrollTo: scrollTo
     }

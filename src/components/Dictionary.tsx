@@ -2,7 +2,7 @@ import { DictionaryEntry } from '../types/TranslationTypes'
 import BtnDictionary from './buttons/BtnDictionary'
 import { FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
 import DictionaryTranslations from './DictionaryTranslations';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 
 interface IProps {
     currentPhrase: DictionaryEntry
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentPhrase, setPhraseList}:IProps) => {
-
+  
   const addPhraseToList = (translation:DictionaryEntry) => {
     if(translation.translations[0] === "") return;
 
@@ -59,49 +59,61 @@ const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentP
     return index;
   };
 
-  const savePhrase = (e:ChangeEvent<HTMLInputElement>) => {
+  // const resizeTextArea = () => {
+
+  //   if (!textAreaRef.current) {
+  //     return;
+  //   }
+
+  //   textAreaRef.current.style.height = "auto"; // will not work without this!
+  //   textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+  // };
+
+  const onTextAreaChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentPhrase({original:currentPhrase.original, translations:[e.target.value]});
-  };
+  }
 
   return (
-    <div id='dictionary' className="fixed bottom-0 right-0 left-0 py-5 px-5 bg-white shadow-container">
-        <p className='font-bold text-xl'>{currentTranslations.original ? currentTranslations.original : "Select a phrase to start"}</p>
+    <div id='dictionary' className="fixed h-full max-h-[150px] bottom-0 right-0 left-0 py-5 px-5 bg-white shadow-container flex justify-center">
+        <div className='max-w-[600px] w-full'>
         
-        <p className='p-1'></p>
+          <div className='flex flex-col w-full items-start'>
+            <div className='flex w-full'>
+              <textarea
+                  id='dictionary-input'
+                  rows={2}
+                  className='border-black py-1 px-3 border-[1px] rounded-[3px] w-full resize-none'
+                  value={currentPhrase.translations[0]} 
+                  onChange={onTextAreaChange} />
 
-        <div className='flex flex-col w-fit items-start'>
-          <div className='flex'>
-            <input 
-                className='border-black px-2 border-[1px] rounded-[3px] w-full'
-                type='text' 
-                value={currentPhrase.translations[0]} 
-                onChange={(e)=>{
-                  savePhrase(e);
-                }} />
+                  <p className='p-1'></p>
 
-                <p className='p-1'></p>
+                  <div className='flex'>
+                    {indexOfPhrase(currentPhrase) === -1 ? 
+                        <BtnDictionary action={addPhraseToList} input={currentPhrase}>
+                          <FaPlus className="text-green text-xl"/>
+                        </BtnDictionary>
+                      :
+                      <>
+                        <BtnDictionary action={updatePhraseInList} input={currentPhrase}>
+                          <FaSyncAlt className="text-orange text-xl"/>
+                        </BtnDictionary>
+                        <BtnDictionary action={removePhraseFromList} input={currentPhrase}>
+                          <FaTrash className="text-red text-xl"/>
+                        </BtnDictionary>
+                      </>
+                    }
+                    
+                  </div>
+            </div>
 
-                <div className='flex'>
-                  {indexOfPhrase(currentPhrase) === -1 ? 
-                      <BtnDictionary action={addPhraseToList} input={currentPhrase}>
-                        <FaPlus className="text-green text-xl"/>
-                      </BtnDictionary>
-                    :
-                    <>
-                      <BtnDictionary action={updatePhraseInList} input={currentPhrase}>
-                        <FaSyncAlt className="text-orange text-xl"/>
-                      </BtnDictionary>
-                      <BtnDictionary action={removePhraseFromList} input={currentPhrase}>
-                        <FaTrash className="text-red text-xl"/>
-                      </BtnDictionary>
-                    </>
-                  }
-                  
-                </div>
+            <p className="p-1"></p>
+            <DictionaryTranslations currentTranslations={currentTranslations} currentPhrase={currentPhrase} setCurrentPhrase={setCurrentPhrase}/>
           </div>
 
-          <p className="p-1"></p>
-          <DictionaryTranslations currentTranslations={currentTranslations} currentPhrase={currentPhrase} setCurrentPhrase={setCurrentPhrase}/>
+          <p className='font-bold text-xl'>
+            {currentTranslations.original ? currentTranslations.original : "Select a phrase to start"}
+          </p>
         </div>
     </div>
   )

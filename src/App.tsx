@@ -20,7 +20,7 @@ function App() {
 
   return (
     <Layout>
-      <Navbar/>
+      {router.currentRoute() !== "/read" && <Navbar/>}
       {routeResult || <NotFoundPage />}
     </Layout>
     )

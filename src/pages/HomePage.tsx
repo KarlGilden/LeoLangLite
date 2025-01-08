@@ -1,5 +1,4 @@
 import BtnNav from "../components/buttons/BtnNav";
-import LogoLink from "../components/LogoLink";
 import useRouter from "../hooks/useRouter"
 
 const HomePage = () => {

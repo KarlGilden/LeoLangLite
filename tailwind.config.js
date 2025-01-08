@@ -12,7 +12,7 @@ export default {
         blur: "rgba(0,0,0,0.5)"
       },
       gray: {
-        DEFAULT: "#f3f4f6"
+        DEFAULT: "#F2F2F2"
       },
       red:{
         DEFAULT: "#b91c1c"
@@ -22,7 +22,16 @@ export default {
       },
       green: {
         DEFAULT: "#4d7c0f"
-      }
+      },
+      primary: "#1e4d2b",
+      primaryDark: "#051805",
+      secondary: "#f6cf65",
+      highlight: "#a7c957",
+      wash: "#dce1de"
+    },
+    fontFamily: {
+      nunito: ["Nunito", "serif"],
+      header: ["Poppins", "serif"]
     },
     extend: {
       boxShadow: {

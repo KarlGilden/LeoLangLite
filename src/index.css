@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    }
+  }
+
+*{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 .selected-text{
     background-color: goldenrod;
     border-radius: 2px;
     height: 100%;
-
 }

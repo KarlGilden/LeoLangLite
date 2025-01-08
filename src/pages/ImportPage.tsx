@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useRouter from '../hooks/useRouter';
 import sampleStories from '../data/samples.json'
 import { updateText } from '../data/services/lessonService';
+import BtnNav from '../components/buttons/BtnNav';
 
 const ImportPage = () => {
     const router = useRouter();
@@ -9,7 +10,6 @@ const ImportPage = () => {
     const [text, setText] = useState<string>("");
     const [error, setError] = useState<string>("");
     
-
     const submit = async () => {
         await updateText(text).then(()=>{
             router.navigate("/read");
@@ -23,12 +23,14 @@ const ImportPage = () => {
     }
 
   return (
-    <div className="flex justify-center w-full min-h-screen px-5 py-16 bg-blue-100">
-        <div className='max-w-[600px] p-5 w-full flex flex-col items-center max-w-[600px]'>
-
-            <h1 className='text-3xl'>Choose a premade story</h1>
-
+    <div className="flex justify-center w-full min-h-screen px-5 py-24 bg-gray">
+        <div className='max-w-[600px] w-full flex flex-col items-center max-w-[600px]'>
+            
             <p className='p-5'></p>
+
+            <h3 className='text-3xl'>Choose a premade story</h3>
+
+            <p className='p-3'></p>
 
             <div className='flex justify-between w-full'>
                 <StoryCard action={selectSampleStory} index={0}/>
@@ -38,23 +40,22 @@ const ImportPage = () => {
 
             <p className='p-5'></p>
 
-            <h1 className='text-3xl'>Or</h1>
-            <i>Import your own text</i>
-
-            <p className='p-5'></p>
-
             <textarea
                 title='hello'
                 placeholder='Write your text here...'
-                className='w-full h-48 p-2 rounded-[5px] focus:outline-none shadow-container'
+                className='w-full h-48 p-5 rounded-[5px] focus:outline-none shadow-container'
                 value={text}
                 onChange={(e)=>setText(e.target.value)}
             ></textarea>
 
             <p className='p-2'></p>
-            <button className='py-2 px-4 text-xl bg-black text-white rounded-[5px]' onClick={()=>submit()}>
+
+            <BtnNav size={"medium"} type={"solid"} btnFunction={()=>submit()}>
                 Read!
-            </button>
+            </BtnNav>
+
+            <p className='p-1'></p>
+
             <p>{error}</p>
         </div>
     </div>

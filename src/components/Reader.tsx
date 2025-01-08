@@ -32,7 +32,7 @@ const Reader = ({text, define}:IProps) => {
     }
 
   return (
-    <div onMouseDown={(e)=>mouseDown(e)} className='max-w-[600px] reader-wrapper select-text'>
+    <div onMouseDown={(e)=>mouseDown(e)} className='max-w-[600px] reader-wrapper select-text text-xl'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (

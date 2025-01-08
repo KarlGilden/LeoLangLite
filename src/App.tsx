@@ -16,7 +16,6 @@ function App() {
   };
 
   const router = useRouter();
-
   const routeResult: JSX.Element = router.route(routes);
 
   return (

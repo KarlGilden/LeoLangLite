@@ -8,7 +8,6 @@ import ReaderHeader from "../components/ReaderHeader";
 import {fetchText} from '../data/services/lessonService';
 
 const ReadPage = () => {
-    console.log('page render')
     const router = useRouter();
 
     const [text, setText] = useState([[""]]);
@@ -40,7 +39,7 @@ const ReadPage = () => {
     }
 
   return (
-    <div className="px-5 pt-16 pb-28 flex flex-col items-center">
+    <div className="px-5 pt-24 pb-28 flex flex-col items-center">
         <ReaderHeader phraseList={phraseList} />
         <div className="flex justify-center">
             <Reader text={text} define={define}/>

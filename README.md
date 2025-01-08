@@ -1,30 +1,15 @@
-# React + TypeScript + Vite
+# Leolang demo
+https://leolang.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is it?
+Leolang is a powerful application designed to help you learn te reo Māori through reading.
 
-Currently, two official plugins are available:
+The application features an easy to use word look up system using the native SelectionAPI, as well as a maintained dictionary which falls back to Google Translate if the translation is not found. The user can save words and phrases and download them later into a Anki formatted .txt file.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a lightweight demo with the goal of featuring the reading tool and dictionary. When paired with guided courses, grammar guides, and a maintained library of content, the application will be an excellent way to teach te reo Māori.
 
-## Expanding the ESLint configuration
+## Why reading?
+The premise of reading is based on Stephen Krashen's input hypothesis and comprehensible input. The theory places an emphasis on input of the target language rather than grammar instruction and tests. Reading, especially when paired with audio, is a great way of getting input and exposing yourself to as many Māori words and phrases as possible.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Example
+![demo](https://github.com/KarlGilden/LeoLangLite/assets/45926924/0e6905c2-bf06-47f3-9640-b9f1be786788)

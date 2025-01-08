@@ -2,7 +2,7 @@ import { DictionaryEntry } from '../types/TranslationTypes'
 import BtnDictionary from './buttons/BtnDictionary'
 import { FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
 import DictionaryTranslations from './DictionaryTranslations';
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { ChangeEvent } from 'react';
 
 interface IProps {
     currentPhrase: DictionaryEntry

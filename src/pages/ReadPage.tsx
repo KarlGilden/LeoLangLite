@@ -42,7 +42,7 @@ const ReadPage = () => {
   return (
     <div className="px-5 pb-28 flex flex-col items-center">
         <ReaderNav />
-        <ReaderHeader phraseList={phraseList} />
+        <ReaderHeader translation="i am a translation" phraseList={phraseList} />
         <div className="flex justify-center">
             <Reader text={text} define={define}/>
             <Dictionary 

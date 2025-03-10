@@ -32,7 +32,8 @@ const Reader = ({text, define}:IProps) => {
     }
 
   return (
-    <div onMouseDown={(e)=>mouseDown(e)} className='max-w-[600px] reader-wrapper select-text text-xl'>
+    <div className={`max-w-[600px]`}>
+    <div onMouseDown={(e)=>mouseDown(e)} className='reader-wrapper select-text text-xl pb-40'>
         {text.map((paragraph)=>{
             paragraphIndex++;
             return (
@@ -49,6 +50,7 @@ const Reader = ({text, define}:IProps) => {
                 </Fragment>
             )
         })}
+    </div>
     </div>
   )
 }

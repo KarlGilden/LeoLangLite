@@ -11,12 +11,36 @@ export const fetchText = () => {
     });
 };
 
+export const fetchTranslation = () => {
+    return new Promise<string>((resolve, reject)=>{
+        const translation = localStorage.getItem("translation");
+        if(translation){
+            return resolve(translation);
+        }else{
+            return reject();
+        }
+    });
+};
+
 export const updateText = (text:string) => {
     return new Promise<string>((resolve, reject)=>{
         if(_textIsValid(text)){
             const formattedText = _buildText(text);
             localStorage.setItem("text", formattedText);
             return resolve(formattedText);
+        }else{
+            reject();
+        }
+    });
+
+};
+
+
+export const updateTranslation = (translation:string) => {
+    return new Promise<string>((resolve, reject)=>{
+        if(_textIsValid(translation)){
+            localStorage.setItem("translation", translation);
+            return resolve(translation);
         }else{
             reject();
         }

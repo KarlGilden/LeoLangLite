@@ -15,8 +15,8 @@ const Modal = ({isOpen, close, children}:IProps) => {
 
   return (
     <div className={`${isOpen ? "block" : "hidden"} p-2 flex justify-center items-center fixed top-0 bottom-0 right-0 left-0 bg-black-blur z-10`}>
-        <div className="bg-white w-full h-full max-w-[600px] p-5 rounded-[5px] overflow-y-scroll">
-            <div className="dialog-header flex justify-end">
+        <div className="bg-white w-full h-full max-w-[600px] px-5 rounded-[5px] overflow-y-scroll scrollbar">
+            <div className="flex justify-end py-5">
                 <button onClick={close} className="text-2xl"><FaTimes className="text-3xl" /></button>
             </div>
             {children}

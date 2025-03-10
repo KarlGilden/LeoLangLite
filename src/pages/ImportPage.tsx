@@ -1,25 +1,28 @@
 import { useState } from 'react';
 import useRouter from '../hooks/useRouter';
 import sampleStories from '../data/samples.json'
-import { updateText } from '../data/services/lessonService';
+import { updateText, updateTranslation } from '../data/services/lessonService';
 import BtnNav from '../components/buttons/BtnNav';
 
 const ImportPage = () => {
     const router = useRouter();
     
     const [text, setText] = useState<string>("");
+    const [translation, setTranslation] = useState<string>("");
     const [error, setError] = useState<string>("");
     
     const submit = async () => {
-        await updateText(text).then(()=>{
-            router.navigate("/read");
-        }).catch(()=>{
+        await updateText(text)
+        .then(()=>updateTranslation(translation))
+        .then(()=>router.navigate("/read"))
+        .catch(()=>{
             setError("Please enter all fields")
         })
     };
 
     const selectSampleStory = (index:number) => {
         setText(sampleStories[index].text);
+        setTranslation(sampleStories[index].translation);
     }
 
   return (

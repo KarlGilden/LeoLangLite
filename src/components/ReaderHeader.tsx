@@ -22,7 +22,7 @@ const ReaderHeader = ({phraseList, translation}:IProps) => {
     }
 
   return (
-    <div className="flex w-full max-w-[600px] py-4">
+    <div className="flex w-full top-0 bg-white z-5 py-5 md:px-12 px-5">
         <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{showPhraseList()}}><FaList className={"mr-2 text-xl"}/> Saved <span className="ml-2">{phraseList.length}</span></button>
         <p className='p-3'></p>
         <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{setTranslationOpen(true)}}><IoLanguage className={"mr-1 text-xl"}/>Translate</button>

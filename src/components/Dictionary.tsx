@@ -3,16 +3,19 @@ import BtnDictionary from './buttons/BtnDictionary'
 import { FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
 import DictionaryTranslations from './DictionaryTranslations';
 import { ChangeEvent } from 'react';
+import { TbLayoutBottombarCollapseFilled, TbLayoutSidebarLeftCollapseFilled } from 'react-icons/tb';
 
 interface IProps {
     currentPhrase: DictionaryEntry
     phraseList: DictionaryEntry[]
     currentTranslations: DictionaryEntry
     setPhraseList: (phrase:DictionaryEntry[]) => void
-    setCurrentPhrase: (translations:DictionaryEntry)=>void
+    setCurrentPhrase: (translations:DictionaryEntry)=>void,
+    isDocked: boolean,
+    setIsDocked: (isDocked:boolean)=>void
 }
 
-const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentPhrase, setPhraseList}:IProps) => {
+const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTranslations, setCurrentPhrase, setPhraseList}:IProps) => {
   
   const addPhraseToList = (translation:DictionaryEntry) => {
     if(translation.translations[0] === "") return;
@@ -59,24 +62,14 @@ const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentP
     return index;
   };
 
-  // const resizeTextArea = () => {
-
-  //   if (!textAreaRef.current) {
-  //     return;
-  //   }
-
-  //   textAreaRef.current.style.height = "auto"; // will not work without this!
-  //   textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
-  // };
-
   const onTextAreaChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentPhrase({original:currentPhrase.original, translations:[e.target.value]});
   }
 
   return (
-    <div id='dictionary' className="fixed h-full max-h-[150px] bottom-0 right-0 left-0 py-5 px-5 bg-white shadow-container flex justify-center">
-        <div className='max-w-[600px] w-full'>
-        
+    <div id='dictionary' className={`${isDocked ? "sticky top-0 max-w-[400px] ml-5" : "max-w-[600px]"} absolute margin-x-auto w-full bottom-2 py-5 px-5 rounded-[2rem] bg-highlight flex flex-col justify-between`}>
+        <div className='w-full'>
+      
           <div className='flex flex-col w-full items-start'>
             <div className='flex w-full'>
               <textarea
@@ -115,6 +108,13 @@ const Dictionary = ({currentPhrase, phraseList, currentTranslations, setCurrentP
             {currentTranslations.original ? currentTranslations.original : "Select a phrase to start"}
           </p>
         </div>
+        <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{setIsDocked(!isDocked)}}>
+            {isDocked ? 
+                <TbLayoutBottombarCollapseFilled className={"mr-1 text-3xl"}/>
+                :
+                <TbLayoutSidebarLeftCollapseFilled className={"mr-1 text-3xl"}/>
+            }
+        </button>
     </div>
   )
 }

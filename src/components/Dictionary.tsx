@@ -108,7 +108,7 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
             {currentTranslations.original ? currentTranslations.original : "Select a phrase to start"}
           </p>
         </div>
-        <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{setIsDocked(!isDocked)}}>
+        <button className="py-1 text-sm flex items-center font-semibold " disabled={window.innerWidth < 725} onClick={()=>{setIsDocked(!isDocked)}}>
             {isDocked ? 
                 <TbLayoutBottombarCollapseFilled className={"mr-1 text-3xl"}/>
                 :

@@ -63,7 +63,7 @@ const ReadPage = () => {
     <div className="flex flex-col items-center max-h-screen bg-white">
         <ReaderNav />
         <ReaderHeader translation={translation} phraseList={phraseList}/>
-        <div className={` flex justify-center w-full overflow-y-scroll bg-white pb-5 z-1 px-5`}>
+        <div className={`flex justify-center w-full overflow-y-scroll bg-white pb-5 z-1 px-5`}>
             <Reader text={text} define={define}/>
             <Dictionary 
                 isDocked={dictionaryIsDocked}

@@ -3,7 +3,7 @@ import BtnDictionary from './buttons/BtnDictionary'
 import { FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
 import DictionaryTranslations from './DictionaryTranslations';
 import { ChangeEvent } from 'react';
-import { TbLayoutBottombarCollapseFilled, TbLayoutSidebarLeftCollapseFilled } from 'react-icons/tb';
+import { TbLayoutBottombarCollapseFilled, TbLayoutSidebarRightCollapseFilled } from 'react-icons/tb';
 
 interface IProps {
     currentPhrase: DictionaryEntry
@@ -67,7 +67,7 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
   }
 
   return (
-    <div id='dictionary' className={`${isDocked ? "sticky top-0 max-w-[400px] ml-5" : "max-w-[600px]"} absolute margin-x-auto w-full bottom-2 py-5 px-5 rounded-[2rem] bg-highlight flex flex-col justify-between`}>
+    <div id='dictionary' className={`${isDocked ? "sticky top-0 max-w-[400px] ml-5" : "max-w-[600px]"} absolute margin-x-auto w-full bottom-2 py-5 px-5 rounded-[1rem] bg-highlight flex flex-col justify-between`}>
         <div className='w-full'>
       
           <div className='flex flex-col w-full items-start'>
@@ -108,11 +108,11 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
             {currentTranslations.original ? currentTranslations.original : "Select a phrase to start"}
           </p>
         </div>
-        <button className="py-1 text-sm flex items-center font-semibold " disabled={window.innerWidth < 725} onClick={()=>{setIsDocked(!isDocked)}}>
+        <button className="py-1 text-sm flex items-center font-semibold " onClick={()=>{window.innerWidth > 725 ? setIsDocked(!isDocked) : ()=>{}}}>
             {isDocked ? 
                 <TbLayoutBottombarCollapseFilled className={"mr-1 text-3xl"}/>
                 :
-                <TbLayoutSidebarLeftCollapseFilled className={"mr-1 text-3xl"}/>
+                <TbLayoutSidebarRightCollapseFilled className={"mr-1 text-3xl"}/>
             }
         </button>
     </div>

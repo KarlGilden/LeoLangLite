@@ -42,7 +42,7 @@ const Reader = ({text, define}:IProps) => {
                     {paragraph.map((word, index)=>{
                         wordIndex++;
                         return (
-                            <Fragment key={"f2"+index}><span className='flex inline-flex items-center' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span> </Fragment>
+                            <Fragment key={"f2"+index}><span className='flex inline-flex items-center border-transparent border-solid border-2 rounded-md hover:border-wash cursor-pointer' key={`w${wordIndex}`} id={`w${wordIndex}`}>{word}</span></Fragment>
                         )
                     })}
                 </div>

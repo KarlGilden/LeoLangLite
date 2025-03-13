@@ -20,8 +20,18 @@ export const selectAndGetText = () => {
 
     _highlightText(startNode, endNode, containerNode, highlight);
 
-    return formatWord(highlight.textContent);
+    return formatWord(extractPhraseFromHighlight(highlight.childNodes));
 }
+
+const extractPhraseFromHighlight = (highlightNodes:NodeListOf<ChildNode>) =>{
+    let phrase = "";
+
+    for(let i=0;i<highlightNodes.length;i++){
+        phrase += highlightNodes[i].textContent + " ";
+    }
+
+    return phrase;
+};
 
 
 export const formatWord = (str:string | null) => {
@@ -73,8 +83,8 @@ const _highlightText = (startNode:HTMLElement, endNode: HTMLElement, containerNo
             return removeHighlight();
         };
 
-        if(nextSibling && i !== endIndex){
-            highlight.appendChild(nextSibling)
-        }
+        // if(nextSibling && i !== endIndex){
+        //     highlight.appendChild(nextSibling)
+        // }
     }
 };

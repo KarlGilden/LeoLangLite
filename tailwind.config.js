@@ -27,7 +27,8 @@ export default {
       primaryDark: "#051805",
       secondary: "#f6cf65",
       highlight: "#a7c957",
-      wash: "#dce1de"
+      wash: "#dce1de",
+      transparent: "transparent"
     },
     fontFamily: {
       nunito: ["Nunito", "serif"],

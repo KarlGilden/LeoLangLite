@@ -1,9 +1,10 @@
-import { DictionaryEntry } from '../types/TranslationTypes'
-import BtnDictionary from './buttons/BtnDictionary'
+import { DictionaryEntry } from '../../types/TranslationTypes'
+import BtnDictionary from '../buttons/BtnDictionary'
 import { FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
-import DictionaryTranslations from './DictionaryTranslations';
+import DictionaryTranslations from '../DictionaryTranslations';
 import { ChangeEvent } from 'react';
 import { TbLayoutBottombarCollapseFilled, TbLayoutSidebarRightCollapseFilled } from 'react-icons/tb';
+import DictionaryButtonsContainer from './DictionaryButtonsContainer';
 
 interface IProps {
     currentPhrase: DictionaryEntry
@@ -49,16 +50,19 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
   };
 
   const indexOfPhrase = (phrase:string | DictionaryEntry) => {
+    let index = -1;
+
     if(typeof phrase !== 'string'){
         phrase = phrase.original;
     }
-    let index = -1;
+
     for(let i=0;i<phraseList.length;i++){
-        if(phraseList[i]. original === phrase){
+        if(phraseList[i].original === phrase){
             index = i;
             break;
         }
     }
+
     return index;
   };
 
@@ -71,7 +75,7 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
         <div className='w-full'>
       
           <div className='flex flex-col w-full items-start'>
-            <div className='flex w-full'>
+            <div className='w-full'>
               <textarea
                   id='dictionary-input'
                   rows={2}
@@ -79,25 +83,32 @@ const Dictionary = ({isDocked, setIsDocked, currentPhrase, phraseList, currentTr
                   value={currentPhrase.translations[0]} 
                   onChange={onTextAreaChange} />
 
-                  <p className='p-1'></p>
-
-                  <div className='flex'>
-                    {indexOfPhrase(currentPhrase) === -1 ? 
-                        <BtnDictionary action={addPhraseToList} input={currentPhrase}>
-                          <FaPlus className="text-green text-xl"/>
-                        </BtnDictionary>
-                      :
-                      <>
-                        <BtnDictionary action={updatePhraseInList} input={currentPhrase}>
-                          <FaSyncAlt className="text-orange text-xl"/>
-                        </BtnDictionary>
-                        <BtnDictionary action={removePhraseFromList} input={currentPhrase}>
-                          <FaTrash className="text-red text-xl"/>
-                        </BtnDictionary>
-                      </>
-                    }
-                    
-                  </div>
+              <DictionaryButtonsContainer>
+                    <BtnDictionary 
+                      visible={
+                        currentPhrase.original.length >= 1 
+                        && indexOfPhrase(currentPhrase) === -1 }
+                      action={()=>addPhraseToList(currentPhrase)}
+                    >
+                      <FaPlus className="text-green text-xl"/>
+                    </BtnDictionary>
+                    <BtnDictionary 
+                      visible={
+                        currentPhrase.original.length >= 1 
+                        && indexOfPhrase(currentPhrase) >= 0} 
+                      action={()=>updatePhraseInList(currentPhrase)} 
+                      >
+                      <FaSyncAlt className="text-orange text-xl"/>
+                    </BtnDictionary>
+                    <BtnDictionary 
+                      visible={
+                        currentPhrase.original.length >= 1 
+                        && indexOfPhrase(currentPhrase) >= 0} 
+                      action={()=>removePhraseFromList(currentPhrase)} 
+                      >
+                      <FaTrash className="text-red text-xl"/>
+                    </BtnDictionary>                
+              </DictionaryButtonsContainer>
             </div>
 
             <p className="p-1"></p>

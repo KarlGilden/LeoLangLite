@@ -75,16 +75,11 @@ const _highlightText = (startNode:HTMLElement, endNode: HTMLElement, containerNo
     // pack children
     for(let i:number=startIndex;i<=endIndex;i++){
         const toAppend = document.getElementById("w"+i)
-        const nextSibling = toAppend?.nextSibling;
 
         if(toAppend && toAppend?.parentElement?.id === containerNode.id){
             highlight.appendChild(toAppend)
         }else{
             return removeHighlight();
         };
-
-        // if(nextSibling && i !== endIndex){
-        //     highlight.appendChild(nextSibling)
-        // }
     }
 };

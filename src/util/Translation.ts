@@ -1,77 +1,70 @@
 import { DictionaryEntry, GoogleTranslateResult } from "../types/TranslationTypes";
 import dictionary from '../data/dictionary.json';
 
-function getGoogleTranslation(word:string){
+async function getGoogleTranslation(word:string){
+  let response;
 
-    return new Promise<DictionaryEntry>((resolve, reject) => {
-        if(typeof word !== "string") return "Error occured";
+  if(typeof word !== "string") return Promise.reject("Error occured");
 
-        let url = `https://translation.googleapis.com/language/translate/v2?`;
-        url += `&key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`;
-        url += `&q=${encodeURI(word)}`;
-        url += `&source=mi`;
-        url += `&target=${"en"}`;
-        url += `&format=text`;
+  let url = `https://translation.googleapis.com/language/translate/v2?`;
+  url += `&key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`;
+  url += `&q=${encodeURI(word)}`;
+  url += `&source=mi`;
+  url += `&target=${"en"}`;
+  url += `&format=text`;
+
+  try{
+    response = await fetch(url, { 
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    });
+
+    response = await response.json();
     
-        fetch(url, { 
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
-        })
-        .then(res => res.json())
-        .then((response) => {
-            return resolve(_mapGoogleToDictionary(word, response));
-        })
-        .catch(error => {
-          console.log("There was an error with the translation request: ", error);
-          return reject(error);
-        });
-    })
-}
+    if(!response) return null;
+
+    return Promise.resolve(_mapGoogleToDictionary(word, response));
+
+  }catch(e){
+    console.log("There was an error with the translation request: ", e);
+    return Promise.resolve(null);
+  }
+};
 
 function getDictionaryTranslation(phrase:string){
-
-  return new Promise<DictionaryEntry>((resolve, reject) => {
     for(let i=0;i<dictionary.length;i++){
       if(dictionary[i].original === phrase){
-        return resolve(dictionary[i]);
+        return Promise.resolve(dictionary[i] as DictionaryEntry);
       }
     }
-    return reject();
-  });
-}
+    return Promise.resolve(null);
+};
 
 export const translate = async (phrase:string, phraseList:DictionaryEntry[]) => {
+      let translation: DictionaryEntry | null;
 
-  return new Promise<DictionaryEntry | null>(async (resolve, reject) => {
-      let translation:DictionaryEntry | null = null;
+      translation = await _getSavedPhraseTranslation(phrase, phraseList)
+      if(translation) return Promise.resolve(translation);
 
-      translation = _getSavedPhraseTranslation(phrase, phraseList);
-      if(translation) return resolve(translation);
+      translation = await getDictionaryTranslation(phrase);
+      if(translation) return Promise.resolve(translation);
 
-      await getDictionaryTranslation(phrase).then((translation)=>{
-        return resolve(translation);
-      }).catch(async ()=>{
-        await getGoogleTranslation(phrase).then((translation)=>{
-          return resolve(translation);
-        }).catch(()=>{
-          return reject();
-        })
-      })
+      translation = await getGoogleTranslation(phrase);
+      //if(translation) return Promise.resolve(translation);
 
-      return reject(null);
-
-  });
+      return Promise.reject();
 };
 
 const _getSavedPhraseTranslation = (phrase:string, phraseList:DictionaryEntry[]) => {
   for(let i=0;i<phraseList.length;i++){
     if(phraseList[i].original === phrase){
-        return phraseList[i];
+        return Promise.resolve(phraseList[i]);
     }
   }
+
   return null;
 };
 
@@ -79,5 +72,11 @@ const _mapGoogleToDictionary = (phrase:string, googleResult:GoogleTranslateResul
   const returnTranslations = googleResult.data.translations.map((value)=>{
     return value.translatedText;
   });
-  return {original:phrase, translations: returnTranslations}
+
+  const returnObject: DictionaryEntry = {
+    original:phrase, 
+    translations: returnTranslations
+  };
+
+  return returnObject;
 };

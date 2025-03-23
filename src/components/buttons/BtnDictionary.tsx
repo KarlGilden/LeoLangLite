@@ -1,15 +1,14 @@
 import { ReactNode } from 'react'
-import { DictionaryEntry } from '../../types/TranslationTypes'
 
 interface IProps{
-    action: (word:DictionaryEntry)=>void
-    input: DictionaryEntry,
+    action: ()=>void
+    visible: boolean,
     children: ReactNode
 }
 
-const BtnDictionary = ({action, input, children}:IProps) => {
+const BtnDictionary = ({action, visible, children}:IProps) => {
   return (
-    <button className='py-2 mr-2' onClick={()=>{action(input)}}>
+    <button className={`${visible ? 'block': 'hidden'} py-2 mr-2`} onClick={()=>{action()}}>
         {children}
     </button>
   )

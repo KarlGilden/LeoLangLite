@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useRouter from "../hooks/useRouter";
 import Reader from "../components/Reader";
-import Dictionary from "../components/Dictionary";
+import Dictionary from "../components/Dictionary/Dictionary";
 import { DictionaryEntry } from "../types/TranslationTypes";
 import { translate } from "../util/Translation";
 import {fetchText, fetchTranslation} from '../data/services/lessonService';
@@ -49,14 +49,17 @@ const ReadPage = () => {
     }
 
     const define = async (phrase:string) => {
+        let translation;
+
         setCurrentTranslations({original: phrase, translations:[""]});
         setCurrentPhrase({original: phrase, translations:[""]});
 
-        await translate(phrase, phraseList).then((translation)=>{
-            if(!translation) return;
-            setCurrentTranslations(translation);
-            setCurrentPhrase({original:phrase, translations:[translation.translations[0]]});
-        })
+        translation = await translate(phrase, phraseList).catch(()=>{});
+
+        if(!translation) return;
+
+        setCurrentTranslations(translation);
+        setCurrentPhrase({original:phrase, translations:[translation.translations[0]]});
     }
 
   return (

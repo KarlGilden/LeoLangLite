@@ -53,7 +53,7 @@ export const translate = async (phrase:string, phraseList:DictionaryEntry[]) => 
       if(translation) return Promise.resolve(translation);
 
       translation = await getGoogleTranslation(phrase);
-      //if(translation) return Promise.resolve(translation);
+      if(translation) return Promise.resolve(translation);
 
       return Promise.reject();
 };

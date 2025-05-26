@@ -6,13 +6,19 @@ import ImportPage from './pages/ImportPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ReadPage from './pages/ReadPage';
 import Navbar from './components/Navbar';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 
   const routes = {
     '/': <HomePage />,
     '/import': <ImportPage />,
-    '/read': <ReadPage />
+    '/read': <ReadPage />,
+    '/login': <LoginPage />,
+    '/register': <RegisterPage />,
+    '/dashboard': <Dashboard />
   };
 
   const router = useRouter();
@@ -20,7 +26,6 @@ function App() {
 
   return (
     <Layout>
-      {router.currentRoute() !== "/read" && <Navbar/>}
       {routeResult || <NotFoundPage />}
     </Layout>
     )

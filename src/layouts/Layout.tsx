@@ -1,8 +1,10 @@
+import AuthProvider from "../hooks/AuthProvider"
+
 const Layout = ({children}:any) => {
   return (
-    <div>
+    <AuthProvider>
         {children}
-    </div>
+    </AuthProvider>
   )
 }
 

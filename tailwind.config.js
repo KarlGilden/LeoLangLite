@@ -25,7 +25,7 @@ export default {
       },
       primary: "#1e4d2b",
       primaryDark: "#051805",
-      secondary: "#f6cf65",
+      secondary: "#BABD8D",
       highlight: "#a7c957",
       wash: "#dce1de",
       transparent: "transparent"

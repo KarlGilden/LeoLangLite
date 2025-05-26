@@ -1,35 +1,40 @@
 import BtnNav from "../components/buttons/BtnNav";
 import useRouter from "../hooks/useRouter"
+import Page from './layout/Page'
+import Navbar from "../components/Navbar";
 
 const HomePage = () => {
-
   const router = useRouter();
 
   return (
-    <main>
-      <section className="bg-primary flex justify-center h-screen items-center px-5">
-        <div className="text-center max-w-[700px] flex flex-col items-center">
-          <h1 className="font-bold text-white text-4xl sm:text-5xl md:text-7xl font-header">Read <span className="text-highlight font-header font-bold">te reo Māori</span> with ease</h1>
-          <p className="p-3"></p>
-          <div className="flex flex-col sm:flex-row">
+    <Page requiresAuth={false} noAuthAllowed={true}>
+      <>
+      <Navbar/>
+      <main>
+        <section className="bg-primary flex justify-center h-screen items-center px-5">
+          <div className="text-center max-w-[700px] flex flex-col items-center">
+            <h1 className="font-bold text-white text-4xl sm:text-5xl md:text-7xl font-header">Read <span className="text-highlight font-header font-bold">te reo Māori</span> with ease</h1>
+            <p className="p-3"></p>
+            <div className="flex flex-col sm:flex-row">
 
-            <BtnNav type="solid" size="large" btnFunction={()=>{router.navigate("/import")}}>
-              Get Reading!
-            </BtnNav>
+              <BtnNav type="solid" size="large" btnFunction={()=>{router.navigate("/import")}}>
+                Get Reading!
+              </BtnNav>
 
-            <p className="p-2"></p>
+              <p className="p-2"></p>
 
-            <BtnNav type="ghost" size="large" btnFunction={()=>{router.scrollTo("info-section")}}>
-              Learn more
-            </BtnNav>
+              <BtnNav type="ghost" size="large" btnFunction={()=>{router.scrollTo("info-section")}}>
+                Learn more
+              </BtnNav>
 
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <InfoSection />
-    </main>
-
+        <InfoSection />
+      </main>
+    </>
+    </Page>
   )
 }
 
@@ -37,7 +42,7 @@ export default HomePage
 
 const InfoSection = () => {
   return(
-    <section id="info-section" className="flex justify-center w-full p-5 sm:p-16 py-16 bg-wash">
+    <section id="info-section" className="flex justify-center w-full p-5 sm:p-16 py-16 bg-secondary">
       <div className="flex flex-col sm:flex-row sm:items-center h-full">
         <div className="w-full">
           <h3 className="text-4xl font-bold font-header">How it works</h3>

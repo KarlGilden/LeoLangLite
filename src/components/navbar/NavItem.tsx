@@ -7,7 +7,7 @@ interface IProps{
 
 const NavItem = ({ children, href }: IProps) => {
   return (
-    <a href={href} className="h-full flex items-center hover:bg-primaryDark px-2">
+    <a href={href} className="h-full flex items-center px-2 border-2 border-solid border-transparent hover:border-b-white">
         {children}
     </a>
   )

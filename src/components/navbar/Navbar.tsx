@@ -20,6 +20,7 @@ const Navbar = () => {
         <NavItem href="/profile">
           <NavUserInfo username={identity?.name || "" } imgUrl={identity?.avatar_url} />
         </NavItem>
+        <NavItem href=""><small>Sign out</small></NavItem>
       </NavList>
     </nav>
   )

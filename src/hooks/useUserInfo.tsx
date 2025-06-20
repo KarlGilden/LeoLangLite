@@ -27,7 +27,5 @@ export const useUserInfo = (): IUserInfo => {
         return count[0]
     }
 
-    
-
     return { getUserDictionary, getKnownWordsCount, getLearningWordsCount};
 };

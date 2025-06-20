@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { UserIdentity } from '@supabase/supabase-js';
 import { useUserInfo } from '../hooks/useUserInfo';
 import Spacer from '../components/layout/Spacer';
-import Navbar from '../components/layout/Navbar';
+import Navbar from '../components/navbar/Navbar';
 
 function Dashboard() {
     const {getUser} = useAuth();

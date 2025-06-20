@@ -1,10 +1,10 @@
 import { useContext, createContext, useState } from "react";
 import supabase from "../data/supabase";
-import { AuthError, Provider, Session, User, WeakPassword } from "@supabase/supabase-js";
+import { AuthError, Provider, Session, User, UserIdentity, WeakPassword } from "@supabase/supabase-js";
 
 interface AuthContextType {
   user: User | null
-  getUser: ()=>Promise<User | null>;
+  getUser: () => Promise<User | null>;
   oAuthLoginAction: (provider:Provider) => void;
   credentialsLoginAction: (credentials:LoginData) => Promise<CredentialResponseData | AuthError>;
   credentialsRegisterAction: (credentials:RegisterData) => Promise<CredentialResponseData | AuthError>;

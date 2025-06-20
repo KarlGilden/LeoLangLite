@@ -1,7 +1,7 @@
 import BtnNav from "../components/buttons/BtnNav";
 import useRouter from "../hooks/useRouter"
 import Page from './layout/Page'
-import Navbar from "../components/Navbar";
+import Navbar from "../components/HomeNavbar";
 
 const HomePage = () => {
   const router = useRouter();

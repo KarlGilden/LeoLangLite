@@ -5,10 +5,10 @@ import HomePage from './pages/HomePage';
 import ImportPage from './pages/ImportPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ReadPage from './pages/ReadPage';
-import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
+import ReviewPage from './pages/ReviewPage';
 
 function App() {
 
@@ -18,7 +18,8 @@ function App() {
     '/read': <ReadPage />,
     '/login': <LoginPage />,
     '/register': <RegisterPage />,
-    '/dashboard': <Dashboard />
+    '/dashboard': <Dashboard />,
+    '/review': <ReviewPage />
   };
 
   const router = useRouter();

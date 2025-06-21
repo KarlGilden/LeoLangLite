@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/AuthProvider'
-import useRouter from '../../hooks/useRouter';
+import { Navigate } from "react-router-dom";
 
 interface IProps {
     children: ReactElement,
@@ -10,21 +10,20 @@ interface IProps {
 
 const Page = ({children, requiresAuth, noAuthAllowed}:IProps) => {
     const { getUser } = useAuth();
-    const router = useRouter();
     
     const [authState, setAuthState] = useState("LOADING");
 
     const getCurrentUser = async () => {
         const user = await getUser().catch(()=>{
             if(requiresAuth){
-                router.navigate("/login");
+                return setAuthState("UNAUTHORIZED");
             }
             return setAuthState("AUTHORIZED")
         });
 
         if(user){
             if(noAuthAllowed){
-                return router.navigate("/dashboard")
+                return setAuthState("NOAUTHALLOWED")
             }
 
             return setAuthState("AUTHORIZED")
@@ -40,8 +39,10 @@ const Page = ({children, requiresAuth, noAuthAllowed}:IProps) => {
             return <h1>Loading...</h1>
         case "AUTHORIZED":
             return children
-        case "FAILED":
-            return <h1>Failed</h1>
+        case "UNAUTHORIZED":
+            return <Navigate to="/login" />
+        case "NOAUTHALLOWED":
+            return <Navigate to="/dashboard" />
     }
 }
 

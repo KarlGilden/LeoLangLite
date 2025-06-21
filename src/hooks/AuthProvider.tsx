@@ -1,6 +1,7 @@
 import { useContext, createContext, useState } from "react";
 import supabase from "../data/supabase";
-import { AuthError, Provider, Session, User, UserIdentity, WeakPassword } from "@supabase/supabase-js";
+import { AuthError, Provider, Session, User, WeakPassword } from "@supabase/supabase-js";
+import useRouter from "./useRouter";
 
 interface AuthContextType {
   user: User | null
@@ -25,6 +26,8 @@ interface CredentialResponseData {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }:any) => {
+  const { navigate } = useRouter();
+
   const [user, setUser] = useState<User | null>(null);
 
   const getUser = async () => {
@@ -71,8 +74,12 @@ const AuthProvider = ({ children }:any) => {
     return Promise.resolve(data);
 };
 
-  const logOut = () => {
+  const logOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    //if(error) return console.log(error);
 
+    localStorage.removeItem("sb-pqglzettghidauuoufmk-auth-token")
+    navigate("/");
   };
 
   return (

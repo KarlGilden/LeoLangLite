@@ -1,10 +1,11 @@
-import Page from './layout/Page'
-import { useAuth } from '../hooks/AuthProvider'
+import Page from '../layout/Page'
+import { useAuth } from '../../hooks/AuthProvider'
 import { useEffect, useState } from 'react';
 import { UserIdentity } from '@supabase/supabase-js';
-import { useUserInfo } from '../hooks/useUserInfo';
-import Spacer from '../components/layout/Spacer';
-import Navbar from '../components/navbar/Navbar';
+import { useUserInfo } from '../../hooks/useUserInfo';
+import Spacer from '../../components/layout/Spacer';
+import Navbar from '../../components/navbar/Navbar';
+import CourseList from '../../components/dashboard/CourseList';
 
 function Dashboard() {
     const {getUser} = useAuth();
@@ -33,18 +34,17 @@ function Dashboard() {
       const knownWords = await getKnownWordsCount();
       setLearningWordCount(learningWords.count)
       setKnownWordCount(knownWords.count)
-      const userDict = await getUserDictionary();
-      console.log(userDict)
     }
 
   return (
     <Page requiresAuth={true} noAuthAllowed={false}>
       <div>
         <Navbar />
-        <div className='flex h-screen pt-[50px]'>
-            <div className='w-full h-full p-5'>
+        <div className='flex flex-col h-screen pt-[50px]'>
+
+            <div className='w-full p-10'>
               <h1 className='text-2xl'>Welcome,</h1>
-              <h2 className='text-4xl'>{userData?.identity_data?.full_name}</h2>                <Spacer size={2} />
+              <h2 className='text-4xl'>{userData?.identity_data?.full_name}</h2>
               <Spacer size={1} />
               <div className='flex items-center'>
                 <div>
@@ -55,6 +55,12 @@ function Dashboard() {
                 <button className='bg-highlight py-2 px-5 rounded-3xl'>Review</button>
               </div>
             </div>
+
+            <div className='px-10'>
+              <h1 className='font-bold text-2xl'>Courses</h1>
+              <Spacer size={2} />
+              <CourseList />
+            </div> 
         </div>
       </div>
 

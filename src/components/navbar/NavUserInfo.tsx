@@ -11,8 +11,6 @@ const NavUserInfo = ({ username, imgUrl }:IProps) => {
         <div className="h-10 w-10  rounded-full overflow-hidden">
           <img src={imgUrl} alt="" />
         </div>
-        <Spacer size={1} />
-        <p>{username}</p>
     </div>
   )
 }

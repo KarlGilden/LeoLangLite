@@ -4,7 +4,7 @@ import NavList from "./NavList";
 import NavUserInfo from "./NavUserInfo";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   console.log(user);
 
@@ -20,7 +20,7 @@ const Navbar = () => {
         <NavItem href="/profile">
           <NavUserInfo username={identity?.name || "" } imgUrl={identity?.avatar_url} />
         </NavItem>
-        <NavItem href=""><small>Sign out</small></NavItem>
+        <NavItem onClick={logOut}><small>Sign out</small></NavItem>
       </NavList>
     </nav>
   )

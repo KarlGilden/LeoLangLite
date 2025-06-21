@@ -1,6 +1,6 @@
-import LoginForm from "../components/auth/LoginForm"
+import LoginForm from "../../components/auth/LoginForm"
 import { IoArrowBack } from "react-icons/io5";
-import useRouter from "../hooks/useRouter";
+import useRouter from "../../hooks/useRouter";
 
 const LoginPage = () => {
   const { navigate } = useRouter();

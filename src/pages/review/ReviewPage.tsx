@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Page from './layout/Page'
-import { useUserInfo } from '../hooks/useUserInfo';
-import Navbar from '../components/navbar/Navbar';
-import DataTable from '../components/layout/DataTable';
+import Page from '../layout/Page'
+import { useUserInfo } from '../../hooks/useUserInfo';
+import Navbar from '../../components/navbar/Navbar';
+import DataTable from '../../components/layout/DataTable';
 
 const ReviewPage = () => {
     const { getUserDictionary } = useUserInfo();

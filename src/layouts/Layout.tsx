@@ -1,9 +1,10 @@
+import { Outlet } from "react-router-dom"
 import AuthProvider from "../hooks/AuthProvider"
 
-const Layout = ({children}:any) => {
+const Layout = () => {
   return (
     <AuthProvider>
-        {children}
+        <Outlet />
     </AuthProvider>
   )
 }

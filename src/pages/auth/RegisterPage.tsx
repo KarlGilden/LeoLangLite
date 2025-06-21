@@ -1,6 +1,6 @@
 import { IoArrowBack } from "react-icons/io5";
-import RegisterForm from "../components/auth/RegisterForm"
-import useRouter from "../hooks/useRouter";
+import RegisterForm from "../../components/auth/RegisterForm"
+import useRouter from "../../hooks/useRouter";
 
 const RegisterPage = () => {
   const { navigate } = useRouter();

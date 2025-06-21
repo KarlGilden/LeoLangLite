@@ -1,4 +1,3 @@
-import Page from '../layout/Page'
 import { useAuth } from '../../hooks/AuthProvider'
 import { useEffect, useState } from 'react';
 import { UserIdentity } from '@supabase/supabase-js';
@@ -9,7 +8,7 @@ import CourseList from '../../components/dashboard/CourseList';
 
 function Dashboard() {
     const {getUser} = useAuth();
-    const { getUserDictionary, getKnownWordsCount, getLearningWordsCount } = useUserInfo();
+    const { getKnownWordsCount, getLearningWordsCount } = useUserInfo();
 
     const [userData, setUserData] = useState<UserIdentity | null>(null);
     const [knownWordCount, setKnownWordCount] = useState<number>(0);
@@ -37,7 +36,6 @@ function Dashboard() {
     }
 
   return (
-    <Page requiresAuth={true} noAuthAllowed={false}>
       <div>
         <Navbar />
         <div className='flex flex-col h-screen pt-[50px]'>
@@ -63,8 +61,6 @@ function Dashboard() {
             </div> 
         </div>
       </div>
-
-    </Page>
   )
 }
 

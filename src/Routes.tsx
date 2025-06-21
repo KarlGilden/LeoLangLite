@@ -1,21 +1,32 @@
 import { RouteObject } from "react-router-dom";
-import Layout from "./layouts/Layout";
 import { homeRoutes } from "./pages/home/Routes";
 import { authRoutes } from "./pages/auth/Routes";
 import { dashboardRoutes } from "./pages/dashboard/Routes";
 import { reviewRoutes } from "./pages/review/Routes";
 import { courseRoutes } from "./pages/course/Routes";
+import NotFoundPage from "./pages/NotFoundPage";
+import AuthPage from "./pages/layout/AuthPage";
+import Page from "./pages/layout/Page";
 
-export const Routes = homeRoutes
+export const publicRoutes = homeRoutes
     .concat(authRoutes)
-    .concat(dashboardRoutes)
+
+export const privateRoutes = dashboardRoutes
     .concat(reviewRoutes)
     .concat(courseRoutes);
+
 
 export const RouterRoutes:RouteObject[] = [
     {
         path: "",
-        element: <Layout />,
-        children: Routes
+        element: <Page />,
+        errorElement: <NotFoundPage />,
+        children: publicRoutes
+    },
+    {
+        path: "/learn",
+        element: <AuthPage />,
+        errorElement: <NotFoundPage />,
+        children: privateRoutes
     }
 ]

@@ -1,8 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import ReviewPage from "./ReviewPage";
 
-
-const reviewPage = "/review";
+const reviewPage = "review";
 
 const reviewRoutes: RouteObject[] = [
     {

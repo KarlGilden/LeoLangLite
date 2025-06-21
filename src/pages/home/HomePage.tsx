@@ -1,13 +1,11 @@
 import BtnNav from "../../components/buttons/BtnNav";
 import useRouter from "../../hooks/useRouter"
-import Page from '../layout/Page'
 import Navbar from "../../components/HomeNavbar";
 
 const HomePage = () => {
   const router = useRouter();
 
   return (
-    <Page requiresAuth={false} noAuthAllowed={true}>
       <>
       <Navbar/>
       <main>
@@ -34,7 +32,6 @@ const HomePage = () => {
         <InfoSection />
       </main>
     </>
-    </Page>
   )
 }
 

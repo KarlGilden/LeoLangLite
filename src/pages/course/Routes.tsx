@@ -1,8 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import CoursePage from "./CoursePage";
 
-
-const coursePath = "/course/:id";
+const coursePath = "course/:id";
 
 const courseRoutes: RouteObject[] = [
     {

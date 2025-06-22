@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { UserIdentity } from '@supabase/supabase-js';
 import { useUserInfo } from '../../hooks/useUserInfo';
 import Spacer from '../../components/layout/Spacer';
-import Navbar from '../../components/navbar/Navbar';
 import CourseList from '../../components/dashboard/CourseList';
 
 function Dashboard() {

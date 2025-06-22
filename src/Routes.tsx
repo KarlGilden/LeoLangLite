@@ -8,9 +8,11 @@ import NotFoundPage from "./pages/NotFoundPage";
 import AuthPage from "./pages/layout/AuthPage";
 import Page from "./pages/layout/Page";
 import { lessonRoutes } from "./pages/lesson/Routes";
+import { libraryRoutes } from "./pages/library/Routes";
 
 export const publicRoutes = homeRoutes
     .concat(authRoutes)
+    .concat(libraryRoutes);
 
 export const privateRoutes = dashboardRoutes
     .concat(reviewRoutes)

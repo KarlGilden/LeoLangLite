@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useUserInfo } from '../../hooks/useUserInfo';
-import Navbar from '../../components/navbar/Navbar';
 import DataTable from '../../components/layout/DataTable';
 
 const ReviewPage = () => {
@@ -37,14 +36,11 @@ const ReviewPage = () => {
     }   
 
   return (
-        <div>
-            <Navbar />
-            <div className='flex h-screen pt-[50px]'>
-                <div className='p-10 w-full'>
-                    <DataTable headers={reviewTableHeaders} data={reviewTableData}/>
-                </div>
-            </div>
+    <div className='flex'>
+        <div className='p-10 w-full'>
+            <DataTable headers={reviewTableHeaders} data={reviewTableData}/>
         </div>
+    </div>
   )
 }
 

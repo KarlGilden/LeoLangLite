@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Link } from "react-router-dom"
 
 interface IProps{
     children: ReactNode
@@ -8,9 +9,12 @@ interface IProps{
 
 const NavItem = ({ children, href, onClick }: IProps) => {
   return (
-    <div onClick={onClick} className="h-full flex items-center px-2 border-2 border-solid border-transparent hover:border-b-white">
+    <Link to={href || ""} className="h-full border-[5px] border-solid border-transparent hover:border-b-highlight transition-all duration-300">
+      <div onClick={onClick} className="h-full flex items-center px-2">
         {children}
-    </div>
+      </div>
+    </Link>
+
   )
 }
 

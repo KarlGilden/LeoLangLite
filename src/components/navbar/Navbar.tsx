@@ -13,8 +13,8 @@ const Navbar = () => {
   return (
     <nav className='absolute top-0 left-0 h-[50px] px-5 flex justify-between bg-primary text-white w-full'>
         <NavList>
-            <NavItem href="/dashboard">Dashboard</NavItem>
-            <NavItem href="/review">Review</NavItem>
+            <NavItem href="/learn/dashboard">Dashboard</NavItem>
+            <NavItem href="/learn/review">Review</NavItem>
         </NavList>
         <NavList>
         <NavItem href="/profile">

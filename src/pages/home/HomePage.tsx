@@ -6,10 +6,8 @@ const HomePage = () => {
   const router = useRouter();
 
   return (
-      <>
-      <Navbar/>
       <main>
-        <section className="bg-primary flex justify-center h-screen items-center px-5">
+        <section className="bg-primary flex justify-center min-h-[75vh] p-10 items-center px-5">
           <div className="text-center max-w-[700px] flex flex-col items-center">
             <h1 className="font-bold text-white text-4xl sm:text-5xl md:text-7xl font-header">Read <span className="text-highlight font-header font-bold">te reo Māori</span> with ease</h1>
             <p className="p-3"></p>
@@ -31,7 +29,6 @@ const HomePage = () => {
 
         <InfoSection />
       </main>
-    </>
   )
 }
 

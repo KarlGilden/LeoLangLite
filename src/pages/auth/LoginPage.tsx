@@ -10,12 +10,12 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="bg-primary flex justify-center items-center h-screen">
-      <nav className="absolute top-0 left-0 flex justify-center w-full p-10">
+    <div className="bg-primary flex flex-col justify-center items-center h-full">
+      {/* <nav className="flex justify-center w-full p-10">
         <div className="max-w-[600px] w-full">
           <button onClick={handleBackPress} className="text-highlight"><IoArrowBack className="text-4xl"/></button>
         </div>
-      </nav>
+      </nav> */}
       <LoginForm/>
     </div>
   )

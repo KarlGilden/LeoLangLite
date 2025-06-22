@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getDashboardCourses } from '../../data/services/coursesService';
 import CourseCard from '../cards/CourseCard';
-import Spacer from '../layout/Spacer';
 
 const CourseList = () => {
     const [courses, setCourses] = useState<any>([]);

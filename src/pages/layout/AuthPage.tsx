@@ -29,10 +29,10 @@ const AuthPage = () => {
             return <Navigate to="/login" />
         case "AUTHORIZED":
             return (
-            <>
+            <div className='pt-[50px]'>
                 <Navbar />
                 <Outlet />
-            </>
+            </div>
             )
     }
 }

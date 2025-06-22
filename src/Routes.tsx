@@ -7,13 +7,15 @@ import { courseRoutes } from "./pages/course/Routes";
 import NotFoundPage from "./pages/NotFoundPage";
 import AuthPage from "./pages/layout/AuthPage";
 import Page from "./pages/layout/Page";
+import { lessonRoutes } from "./pages/lesson/Routes";
 
 export const publicRoutes = homeRoutes
     .concat(authRoutes)
 
 export const privateRoutes = dashboardRoutes
     .concat(reviewRoutes)
-    .concat(courseRoutes);
+    .concat(courseRoutes)
+    .concat(lessonRoutes);
 
 
 export const RouterRoutes:RouteObject[] = [

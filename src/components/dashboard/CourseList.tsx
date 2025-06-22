@@ -21,6 +21,7 @@ const CourseList = () => {
             return (
                 <>
                 <CourseCard 
+                    id={course.id}
                     title={course.title} 
                     description={course.description}
                     lessonCount={course.lessons[0].count}

@@ -1,3 +1,4 @@
+import supabase from "../supabase";
 
 
 export const fetchText = () => {
@@ -65,3 +66,31 @@ const _buildText = (text:string) => {
 
     return JSON.stringify(formattedText);
 };
+
+export const getLessonData = async (lessonId: string) => {
+    const {data, error} = await supabase.from('lessons')
+    .select(`
+        title,
+        story: stories(
+            id,
+            title,
+            text
+        ),
+        grammar_guide: grammar_guides(
+            id,
+            title,
+            text
+        ),
+        dialogue: dialogues(
+            id,
+            title,
+            text
+        )
+        `).eq("id", lessonId)
+    
+    if(error){
+        throw new Error(error.message);
+    }
+
+    return data;
+}   

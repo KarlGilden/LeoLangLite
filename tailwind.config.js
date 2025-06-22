@@ -12,7 +12,9 @@ export default {
         blur: "rgba(0,0,0,0.5)"
       },
       gray: {
-        DEFAULT: "#F2F2F2"
+        DEFAULT: "#F2F2F2",
+        medium: "#D3D3D3",
+        dark: "#A9A9A9"
       },
       red:{
         DEFAULT: "#b91c1c"

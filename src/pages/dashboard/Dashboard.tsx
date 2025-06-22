@@ -36,10 +36,7 @@ function Dashboard() {
     }
 
   return (
-      <div>
-        <Navbar />
-        <div className='flex flex-col h-screen pt-[50px]'>
-
+        <div className='flex flex-col h-screen'>
             <div className='w-full p-10'>
               <h1 className='text-2xl'>Welcome,</h1>
               <h2 className='text-4xl'>{userData?.identity_data?.full_name}</h2>
@@ -60,7 +57,6 @@ function Dashboard() {
               <CourseList />
             </div> 
         </div>
-      </div>
   )
 }
 

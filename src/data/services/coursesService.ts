@@ -18,16 +18,16 @@ export const getDashboardCourses = async () => {
         return data;
 }
 
-export const getCourseLessons = async (courseId: number) => {
-    const {data, error} = await supabase.from('lessons')
+export const getCourseLessons = async (courseId: string) => {
+    const {data, error} = await supabase.from('courses')
         .select(`
-            id, 
-            title, 
-            description, 
-            grade, 
-            created_at
-            `)
-        .eq("course_id", courseId);
+            title,
+            description,
+            lessons(
+                id,
+                title
+            )
+            `).eq("id", courseId)
         
         if(error){
             throw new Error(error.message);
